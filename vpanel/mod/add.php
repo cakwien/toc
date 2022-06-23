@@ -66,3 +66,15 @@ function tgl($tanggal)
 
     return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
 }
+
+function sel($a,$b)
+{
+    if($a==$b)
+    {
+        $ret = "selected=selected";
+    }else
+    {
+        $ret="";
+    }
+    return $ret;
+}
