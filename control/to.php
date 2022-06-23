@@ -25,6 +25,17 @@ if(!empty($_GET['p']))
     }
 
 
+
+
+
+
+
+    elseif($p=="login")
+    {
+        include('login.php');
+    }
+
+
     else
     {
         include('view/index.php');

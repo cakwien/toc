@@ -1,6 +1,8 @@
 <?php
 
 include('mod/sutep.php');
+include('mod/add.php');
+
 
 
 
