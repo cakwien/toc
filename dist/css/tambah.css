@@ -1,0 +1,26 @@
+.kotaknomor{
+    width:40px;
+    height:50px; 
+    border-style: solid;
+    border-color: rgb(16, 53, 166);
+    border-width:thin;
+    border-radius:5px;
+    text-align:center;
+}
+
+.hurufkotak{
+   margin-top:2px;
+   font-weight: bold;
+}
+
+.kotaknomor:hover{
+    background-color:#1F4690;
+    color:antiquewhite;
+}
+
+.hurufpilihan{
+    margin-top:40%;
+    font-weight: bold;
+    background-color:darkgrey;
+}
+
