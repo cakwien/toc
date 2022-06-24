@@ -19,21 +19,21 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
-    <title>Document</title>
+    <title>TOC</title>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Admin Tryout Online</a>
+            <a class="navbar-brand" href="../vpanel">Admin Tryout Online</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="../vpanel">Home</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -41,8 +41,8 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="#">Jadwal</a></li>
-                            <li><a class="dropdown-item" href="#">Modul</a></li>
-                            <li><a class="dropdown-item" href="#">Soal</a></li>
+                            <li><a class="dropdown-item" href="?p=modul">Modul</a></li>
+                            <li><a class="dropdown-item" href="?p=soal">Soal</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -86,10 +86,10 @@
             $('#datatabel').DataTable({
                 "language": {
                     "lengthMenu": "Tampilkan _MENU_ baris",
-                    "zeroRecords": "Data tidak ditemukan...",
+                    "zeroRecords": "<span class='text-danger'>Data tidak ditemukan...</span>",
                     "info": "Tampilan hal. _PAGE_ dari _PAGES_",
-                    "infoEmpty": "Tidak ada data...",
-                    "infoFiltered": "(disaring dari _MAX_ data keseluruhan)",
+                    "infoEmpty": "<b class='text-danger'>Tidak ada data...</b>",
+                    "infoFiltered": "(disaring dari <strong>_MAX_</strong> data keseluruhan)",
                     "sSearch": "Cari : ",
                     "oPaginate": {
                         "sFirst": "Pertama",

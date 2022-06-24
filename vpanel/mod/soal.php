@@ -22,7 +22,7 @@ class soal{
 
     function index($con,$id)
     {
-        $q=mysqli_query($con,"select * from u_soal where id_soal = $id");
+        $q=mysqli_query($con,"select * from u_soal join u_opsi on u_soal.id_soal = u_opsi.id_soal where id_soal = $id");
         $dt = mysqli_fetch_array($q);
         return $dt;
     }
