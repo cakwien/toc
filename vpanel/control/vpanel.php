@@ -58,6 +58,26 @@ if(!empty($_GET['p']))
         include('view/index.php');
     }
 
+    elseif($p=="peserta")
+    {
+       if(!empty($_GET['kelas']))
+       {
+        $listpeserta = $peserta->allbykelas($con, $_GET['kelas']);
+       }else
+       {
+        $listpeserta = $peserta->all($con);
+       }
+       
+        
+       
+       include('view/index.php');
+    }
+
+    elseif($p=="jadwal")
+    {
+        include('view/index.php');
+    }
+
     elseif($p=="insoal")
     {
 
@@ -103,5 +123,3 @@ else
 {
     include('view/index.php');
 }
-
-?>

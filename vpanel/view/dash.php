@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-6">
-        <h3>Selamat Datang Admin...</h3>
+        <h5>Selamat Datang Admin...</h5>
     </div>
 </div>
 

@@ -24,7 +24,7 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="height:40px;">
         <div class="container-fluid">
             <a class="navbar-brand" href="../vpanel">Admin Tryout Online</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,9 +40,11 @@
                             Master
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Jadwal</a></li>
+                            <li><a class="dropdown-item" href="?p=jadwal">Jadwal</a></li>
                             <li><a class="dropdown-item" href="?p=modul">Modul</a></li>
                             <li><a class="dropdown-item" href="?p=soal">Soal</a></li>
+                            <li><a class="dropdown-item" href="?p=kelas">Kelas</a></li>
+                            <li><a class="dropdown-item" href="?p=peserta">Peserta</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -50,8 +52,8 @@
                             Laporan
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Jadwal</a></li>
                             <li><a class="dropdown-item" href="#">Hasil</a></li>
+                            <li><a class="dropdown-item" href="#">Statistik</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

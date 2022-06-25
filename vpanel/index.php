@@ -18,6 +18,12 @@ $soal = new soal;
 include('mod/opsi.php');
 $opsi = new opsi;
 
+include('mod/peserta.php');
+$peserta = new peserta;
+
+include('mod/kelas.php');
+$kelas = new kelas;
+
 
 include('control/vpanel.php');
 
