@@ -15,6 +15,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Jadwal</th>
                             <th>Modul</th>
                             <th>Kelas</th>
                             <th>Start</th>
@@ -23,6 +24,30 @@
                             <th>Proggress</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        foreach ($jadwal->all_limit($con, "5") as $jd) {
+                        ?>
+                            <tr>
+                                <td><?= $no ?></td>
+                                <td><?= $jd['jadwal'] ?></td>
+                                <td><?= $jd['modul'] ?></td>
+                                <td>
+                                    <?php
+                                    foreach ($jadwal->allrombel($con, $jd['jadwal']) as $kl) {
+                                        echo '<span class="bg-danger text-light p-1 rounded">' . $kl['nm_kelas'] . ' - ' . $kl['rombel'] . "</span>&nbsp;";
+                                    }
+                                    ?>
+                                </td>
+                                <td><?= tgl($jd['time_start']) . " - " . date('H:i', $jd['time_start']) ?></td>
+                                <td><?= tgl($jd['time_end']) . " - " . date('H:i', $jd['time_end']) ?></td>
+                                <td><?= $jd['durasi'] ?></td>
+                                <td></td>
+                            </tr>
+                        <?php $no++;
+                        } ?>
+                    </tbody>
                 </table>
             </div>
         </div>

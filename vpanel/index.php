@@ -24,6 +24,8 @@ $peserta = new peserta;
 include('mod/kelas.php');
 $kelas = new kelas;
 
+include('mod/jadwal.php');
+$jadwal = new jadwal;
 
 include('control/vpanel.php');
 

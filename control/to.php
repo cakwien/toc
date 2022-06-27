@@ -6,7 +6,18 @@ if(!empty($_GET['p']))
 
     if($p=="login")
     {
+        if(!empty($_POST['email']) && !empty($_POST['password']))
+        {
+            $in = $peserta->login($con,$_POST['email'],$_POST['password']);
+        }
         include('view/login.php');
+    }
+
+    elseif($p=="logout")
+    {
+        session_start();
+        session_destroy();
+        header('location:?p=login');
     }
 
     elseif($p=="jadwal")
@@ -23,12 +34,6 @@ if(!empty($_GET['p']))
     {
         include('view/index.php');
     }
-
-
-
-
-
-
 
     elseif($p=="login")
     {

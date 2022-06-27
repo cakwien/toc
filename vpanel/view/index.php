@@ -52,6 +52,7 @@
                             Laporan
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="?p=progres">Progress Peserta</a></li>
                             <li><a class="dropdown-item" href="#">Hasil</a></li>
                             <li><a class="dropdown-item" href="#">Statistik</a></li>
                         </ul>

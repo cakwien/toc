@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row mt-3">
-        <h5>Selamat datang,</h5>
+        <h5>Selamat datang, <span class="text-primary"><?=$useraktif['nm_siswa']?></span></h5>
     </div>
 
     <div class="row mt-2">

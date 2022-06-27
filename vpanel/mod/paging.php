@@ -9,6 +9,7 @@ if(!empty($p))
    elseif($p=="modul")   {    require_once('view/modul.php');   }
    elseif($p=="peserta")   {    require_once('view/peserta.php');   }
    elseif($p=="jadwal")   {    require_once('view/jadwal.php');   }
+   elseif($p=="progres")   {    require_once('view/progres.php');   }
 }
 else
 {

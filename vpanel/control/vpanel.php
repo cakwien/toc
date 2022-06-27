@@ -75,6 +75,19 @@ if(!empty($_GET['p']))
 
     elseif($p=="jadwal")
     {
+        if(isset($_POST['simpanjadwal']))
+        {
+           $idrombel = $_POST['rombel'];
+           $start = strtotime($_POST['start']);
+           $end = strtotime($_POST['end']);
+
+           foreach($idrombel as $rb)
+           {
+            $input = $jadwal->insert($con,$_POST['jadwal'],$_POST['modul'],$rb,$start,$end,$_POST['durasi']);
+           }
+        }
+        
+        
         include('view/index.php');
     }
 
@@ -112,6 +125,11 @@ if(!empty($_GET['p']))
             }
         }
 
+        include('view/index.php');
+    }
+
+    elseif($p=="progres")
+    {
         include('view/index.php');
     }
 

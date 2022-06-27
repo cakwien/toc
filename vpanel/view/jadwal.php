@@ -10,24 +10,40 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Jadwal</th>
                             <th>Start</th>
                             <th>End</th>
                             <th>Modul</th>
                             <th>Kelas</th>
-                            <th>Rombel</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        <?php
+                        $no = 1;
+                        foreach ($jadwal->all($con) as $row) {
+                        ?>
+                            <tr>
+                                <td><?= $no ?></td>
+                                <td><?= $row['jadwal'] ?></td>
+                                <td><?= tgl($row['time_start']) ?> - <?= date('H:i', $row['time_start']) ?></td>
+                                <td><?= tgl($row['time_end']) ?> - <?= date('H:i', $row['time_end']) ?></td>
+                                <td><?= $row['modul'] ?></td>
+                                <td>
+                                    <?php
+                                    foreach ($jadwal->allrombel($con, $row['jadwal']) as $kl) 
+                                    {
+                                        echo '<span class="bg-danger text-light p-1 rounded-pill">'.$kl['nm_kelas'] . ' - ' . $kl['rombel']."</span>&nbsp;";
+                                    }
+                                    ?>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-success">Edit</button>
+                                    <button class="btn btn-sm btn-danger">Hapus</button>
+                                </td>
+                            </tr>
+                        <?php $no++;
+                        } ?>
                     </tbody>
                 </table>
             </div>
@@ -45,6 +61,10 @@
             <form action="" method="post">
                 <div class="modal-body">
                     <div class="form-group">
+                        <label for="">Jadwal</label>
+                        <input type="text" name="jadwal" class="form-control" id="" autofocus>
+                    </div>
+                    <div class="form-group mt-2">
                         <label for="">Modul</label>
                         <select name="modul" class="form-select">
                             <?php
@@ -89,12 +109,12 @@
 
                     <div class="form-group mt-2">
                         <label for="">Durasi</label>
-                        <input type="durasi" class="form-control" style="width:100px;">
+                        <input type="number" name="durasi" class="form-control" style="width:100px;">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button name="simpanjadwal" type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>
