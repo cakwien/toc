@@ -17,7 +17,7 @@ class peserta{
     
     function detail($con,$email)
     {
-        $q=mysqli_query($con,"select * from siswa where email = '$email'");
+        $q=mysqli_query($con,"select * from siswa join kelas_siswa on siswa.id_siswa = kelas_siswa.id_siswa join rombel on kelas_siswa.id_rombel = rombel.id_rombel join kelas on rombel.id_kelas = kelas.id_kelas where email = '$email'");
         $dt = mysqli_fetch_array($q);
         return $dt;
     }

@@ -35,11 +35,12 @@ if(!empty($_GET['p']))
         include('view/index.php');
     }
 
-    elseif($p=="login")
+    elseif($p=="hasil")
     {
-        include('login.php');
+        include('view/index.php');
     }
 
+    
 
     else
     {

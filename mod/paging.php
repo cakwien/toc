@@ -15,6 +15,9 @@
             case "soal";
                 require_once('view/soal.php');
                 break;
+            case "hasil";
+                require_once('view/hasil.php');
+                break;
 
 
 
