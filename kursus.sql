@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2022 at 06:12 AM
+-- Generation Time: Jun 29, 2022 at 09:44 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -404,12 +404,20 @@ INSERT INTO `tentor` (`id_tentor`, `nm_tentor`, `alamat`, `tp_lahir`, `tgl_lahir
 
 CREATE TABLE `u_jadwal` (
   `id_jadwal` int(11) NOT NULL,
+  `jadwal` varchar(200) NOT NULL,
   `id_modul` int(11) NOT NULL,
   `id_rombel` int(11) NOT NULL,
   `time_start` int(11) NOT NULL,
   `time_end` int(11) NOT NULL,
   `durasi` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `u_jadwal`
+--
+
+INSERT INTO `u_jadwal` (`id_jadwal`, `jadwal`, `id_modul`, `id_rombel`, `time_start`, `time_end`, `durasi`) VALUES
+(6, 'Percobaan tryout 1', 3, 1, 1656319080, 1656578280, 30);
 
 -- --------------------------------------------------------
 
@@ -770,7 +778,7 @@ ALTER TABLE `tentor`
 -- AUTO_INCREMENT for table `u_jadwal`
 --
 ALTER TABLE `u_jadwal`
-  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `u_jawab`
