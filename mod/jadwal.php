@@ -10,5 +10,7 @@ class jadwal{
         }
         return $list;
     }
+
+    
 }
 ?>

@@ -22,6 +22,13 @@ if(!empty($_GET['p']))
 
     elseif($p=="jadwal")
     {
+        //limit jadwal
+        $btkerjakan = '<button class="btn btn-sm btn-primary"><i class="bi-pencil"></i> Kerjakan</button>';
+        $btselesai = '<button class="btn btn-sm btn-success" disabled><i class="bi-check"></i> Selesai</button>';
+        $btterlambat = '<button class="btn btn-sm btn-secondary" disabled><i class="bi-check"></i> Selesai</button>';
+        $btlanjut = '<button class="btn btn-sm btn-warning"><i class="bi-arrow-down-right-circle-fill"></i> Lanjutkan</button>';
+        
+        
         include('view/index.php');
     }
 
