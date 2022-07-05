@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2022 at 09:44 AM
+-- Generation Time: Jul 05, 2022 at 10:01 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -449,7 +449,8 @@ CREATE TABLE `u_modul` (
 
 INSERT INTO `u_modul` (`id_modul`, `modul`) VALUES
 (2, 'Modul B2'),
-(3, 'Modul B1');
+(3, 'Modul B1'),
+(4, 'Modul A');
 
 -- --------------------------------------------------------
 
@@ -503,6 +504,33 @@ INSERT INTO `u_soal` (`id_soal`, `id_modul`, `soal`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `u_tempsoal`
+--
+
+CREATE TABLE `u_tempsoal` (
+  `id_tempsoal` int(11) NOT NULL,
+  `id_siswa` int(11) NOT NULL,
+  `id_jadwal` int(11) NOT NULL,
+  `id_modul` int(11) NOT NULL,
+  `id_soal` int(11) NOT NULL,
+  `opsi1` int(11) NOT NULL,
+  `opsi2` int(11) NOT NULL,
+  `opsi3` int(11) NOT NULL,
+  `opsi4` int(11) NOT NULL,
+  `opsi5` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `u_tempsoal`
+--
+
+INSERT INTO `u_tempsoal` (`id_tempsoal`, `id_siswa`, `id_jadwal`, `id_modul`, `id_soal`, `opsi1`, `opsi2`, `opsi3`, `opsi4`, `opsi5`) VALUES
+(5, 1, 6, 3, 2, 10, 8, 9, 7, 6),
+(6, 1, 6, 3, 1, 5, 1, 4, 3, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `u_testrun`
 --
 
@@ -513,6 +541,16 @@ CREATE TABLE `u_testrun` (
   `start` int(11) NOT NULL,
   `sisa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `u_testrun`
+--
+
+INSERT INTO `u_testrun` (`id_tesrun`, `id_siswa`, `id_jadwal`, `start`, `sisa`) VALUES
+(1, 1, 6, 1656998811, 0),
+(2, 1, 6, 1656998837, 0),
+(3, 1, 6, 1657007311, 0),
+(4, 1, 6, 1657007480, 0);
 
 --
 -- Indexes for dumped tables
@@ -657,6 +695,12 @@ ALTER TABLE `u_soal`
   ADD PRIMARY KEY (`id_soal`);
 
 --
+-- Indexes for table `u_tempsoal`
+--
+ALTER TABLE `u_tempsoal`
+  ADD PRIMARY KEY (`id_tempsoal`);
+
+--
 -- Indexes for table `u_testrun`
 --
 ALTER TABLE `u_testrun`
@@ -790,7 +834,7 @@ ALTER TABLE `u_jawab`
 -- AUTO_INCREMENT for table `u_modul`
 --
 ALTER TABLE `u_modul`
-  MODIFY `id_modul` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_modul` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `u_opsi`
@@ -805,10 +849,16 @@ ALTER TABLE `u_soal`
   MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `u_tempsoal`
+--
+ALTER TABLE `u_tempsoal`
+  MODIFY `id_tempsoal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `u_testrun`
 --
 ALTER TABLE `u_testrun`
-  MODIFY `id_tesrun` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tesrun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
