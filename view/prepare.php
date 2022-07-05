@@ -17,7 +17,7 @@
                             Nama Modul
                         </div>
                         <div class="col-md-5 fw-bold">
-                            : Nama Modul yang Akan di Kerjakan
+                            : <?= $dtjadwalkerjakan['jadwal'] ?>
                         </div>
                     </div>
                     <div class="row mt-2">
@@ -25,7 +25,7 @@
                             Jumlah Soal
                         </div>
                         <div class="col-md-5 fw-bold">
-                            : 150 Butir
+                            : <?= $dtjs['jumlah'] ?> Butir
                         </div>
                     </div>
                     <div class="row mt-2">
@@ -41,14 +41,18 @@
                             Waktu Pengerjaan
                         </div>
                         <div class="col-md-5 fw-bold">
-                            : 190 Menit
+                            : <?= $dtjadwalkerjakan['durasi'] ?> Menit
                         </div>
                     </div>
 
                 </div>
                 <div class="card-footer">
-                    <button onclick="window.location.href='?p=jadwal'" class="btn btn-danger">Batal</button>
-                    <button class="btn btn-primary">Kerjakan</button>
+                    <button onclick="window.location.href='?p=pre&batal=<?= $useraktif['id_siswa'] ?>&jadwal=<?= $dtjadwalkerjakan['id_jadwal'] ?>'" class="btn btn-danger">Batal</button>
+                    <?php
+                        $kerjakan = $useraktif['id_siswa'] ."-". $dtjadwalkerjakan['id_jadwal']."-".$dtjadwalkerjakan['id_modul'];
+                        echo $dtjadwalkerjakan['id_modul'];
+                    ?>
+                    <button onclick="window.location.href='?p=pre&kerjakan=<?=base64_encode($kerjakan)?>'" class=" btn btn-primary">Kerjakan</button>
                 </div>
             </div>
         </div>

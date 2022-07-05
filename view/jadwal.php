@@ -36,17 +36,7 @@
                                     <td><?= $soal->jumlahsoal($con, $row['id_modul']) ?></td>
                                     <td><?= $row['durasi'] ?> Menit</td>
                                     <td>
-                                        <?php
-                                        $now = time();
-                                        if ($row['time_end'] < $now )
-                                        {   
-                                            echo $btselesai;
-                                        }else
-                                        {
-                                            echo $btkerjakan;
-                                        }
-
-                                        ?>
+                                     <a href="?p=pre&siswa=<?=$useraktif['id_siswa']?>&jadwal=<?=$row['id_jadwal']?>&modul=<?=$row['id_modul']?>">Mulai</a>
                                         <!-- <button class="btn btn-sm btn-primary"><i class="bi-pencil"></i> Kerjakan</button> -->
                                     </td>
                                 </tr>
