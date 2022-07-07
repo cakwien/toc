@@ -15,12 +15,16 @@ if (empty($_SESSION['tryout'])) {
 
         $idsiswa = $useraktif['id_siswa'];
 
+        
+
+
         //tampilkan soal berdasarkan u_tempsoal
         if (empty($_GET['n'])) {
             $qsoal = mysqli_query($con, "Select * from u_tempsoal where id_siswa = '$idsiswa' and id_jadwal = '$idjadwal' order by id_tempsoal desc limit 1");
             $dtsoal = mysqli_fetch_array($qsoal);
             $angka = "1";
             // echo $dtsoal['id_soal'];
+           
         } else {
             $number = base64_decode($_GET['n']);
             $qsoal = mysqli_query($con, "Select * from u_tempsoal where id_siswa = '$idsiswa' and id_jadwal = '$idjadwal' and id_soal = '$number'");
@@ -29,9 +33,34 @@ if (empty($_SESSION['tryout'])) {
             $angka = $tpno[0];
         }
 
+        //jawab soal
+        if(!empty($_GET['ans']))
+        {
+            
+            $idsoal = $dtsoal['id_soal'];
+            $idopsi = $_GET['ans'];
+            $qcekjawab = mysqli_query($con,"Select * from u_jawab where id_siswa = '$idsiswa' and id_soal = '$idsoal' and id_opsi='$idopsi'");
+            $dtcekjawab = mysqli_fetch_array($qcekjawab);
+            if (empty($dtcekjawab[0]))
+            {
+                mysqli_query($con, "insert into u_jawab value('','$idsiswa','$idsoal','$idopsi') ");
+            }else
+            {
+                mysqli_query($con,"update u_jawab set id_opsi = '$idopsi' where id_siswa = '$idsiswa' and id_soal = '$idsoal'");
+            }
+        }
+        
+        
+
         //keterangan posisi soal
         
+    } else
+    {
+        echo "Ujian error";
+        exit;
     }
+
+    
 }
 
 
@@ -79,7 +108,7 @@ if (empty($_SESSION['tryout'])) {
                                 <table class="mb-3">
                                     <tr>
                                         <td style="width:5%" class="align-top">
-                                            <button class="btn btn-outline-primary rounded-pill btn-sm me-2"><?=$abjad[$i-1]?></button>
+                                            <button onclick='window.location.href=""' class="btn btn-outline-primary rounded-pill btn-sm me-2"><?=$abjad[$i-1]?></button>
                                         </td>
                                         <td>
                                             <?= $soal->tpopsi($con, "opsi" . $i, $dtsoal['id_soal']) ?> 

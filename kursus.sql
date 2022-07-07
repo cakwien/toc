@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2022 at 10:01 AM
+-- Generation Time: Jul 07, 2022 at 11:35 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -525,8 +525,8 @@ CREATE TABLE `u_tempsoal` (
 --
 
 INSERT INTO `u_tempsoal` (`id_tempsoal`, `id_siswa`, `id_jadwal`, `id_modul`, `id_soal`, `opsi1`, `opsi2`, `opsi3`, `opsi4`, `opsi5`) VALUES
-(5, 1, 6, 3, 2, 10, 8, 9, 7, 6),
-(6, 1, 6, 3, 1, 5, 1, 4, 3, 2);
+(1, 1, 6, 3, 2, 6, 8, 9, 10, 7),
+(2, 1, 6, 3, 1, 1, 4, 2, 3, 5);
 
 -- --------------------------------------------------------
 
@@ -547,10 +547,7 @@ CREATE TABLE `u_testrun` (
 --
 
 INSERT INTO `u_testrun` (`id_tesrun`, `id_siswa`, `id_jadwal`, `start`, `sisa`) VALUES
-(1, 1, 6, 1656998811, 0),
-(2, 1, 6, 1656998837, 0),
-(3, 1, 6, 1657007311, 0),
-(4, 1, 6, 1657007480, 0);
+(1, 1, 6, 1657186054, 0);
 
 --
 -- Indexes for dumped tables
@@ -852,13 +849,13 @@ ALTER TABLE `u_soal`
 -- AUTO_INCREMENT for table `u_tempsoal`
 --
 ALTER TABLE `u_tempsoal`
-  MODIFY `id_tempsoal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_tempsoal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `u_testrun`
 --
 ALTER TABLE `u_testrun`
-  MODIFY `id_tesrun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_tesrun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
