@@ -50,7 +50,7 @@
                     <button onclick="window.location.href='?p=pre&batal=<?= $useraktif['id_siswa'] ?>&jadwal=<?= $dtjadwalkerjakan['id_jadwal'] ?>'" class="btn btn-danger">Batal</button>
                     <?php
                         $kerjakan = $useraktif['id_siswa'] ."-". $dtjadwalkerjakan['id_jadwal']."-".$dtjadwalkerjakan['id_modul'];
-                        echo $dtjadwalkerjakan['id_modul'];
+                        
                     ?>
                     <button onclick="window.location.href='?p=pre&kerjakan=<?=base64_encode($kerjakan)?>'" class=" btn btn-primary">Kerjakan</button>
                 </div>

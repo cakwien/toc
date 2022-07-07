@@ -22,7 +22,7 @@ class soal{
    function soaltempall($con,$idjadwal)
    {
       $list = array();
-      $q = mysqli_query($con, "select * from u_tempsoal where id_jadwal = '$idjadwal'");
+      $q = mysqli_query($con, "select * from u_tempsoal where id_jadwal = '$idjadwal' order by id_tempsoal asc ");
       while ($dt = mysqli_fetch_array($q)) {
          $list[] = $dt;
       }
@@ -48,6 +48,12 @@ class soal{
          $tpopsi = "";
       }
       return $tpopsi;
+   }
+
+   function showsoal($con,$page)
+   {
+      
+      
    }
 
    

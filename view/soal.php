@@ -3,64 +3,67 @@ if (empty($_SESSION['tryout'])) {
     header('location:?p=jadwal');
 } else {
     if (!empty($_GET['run'])) {
-        $run = explode("-", base64_decode($_GET['run']));
+
+        $urlbasesoal = $_GET['run'];
+        $run = explode("-", base64_decode($urlbasesoal));
         $idjadwal = $run[1];
         $idmodul = $run[2];
-        // echo $idjadwal;
-
+        $idsiswa = $useraktif['id_siswa'];
         //jumlahsoal
         $jumsoal = $soal->jumlahsoal($con, $idmodul);
         // echo $jumsoal[0];
 
-
-        $idsiswa = $useraktif['id_siswa'];
-
-        
-
+        $qjs = mysqli_query($con, "select count(id_tempsoal) from u_tempsoal where id_jadwal = $idjadwal and id_modul = $idmodul and id_siswa = $idsiswa");
+        $js = mysqli_fetch_array($qjs);
+        $jumlahsoal = $js[0];
+        // echo $jumlahsoal;
 
         //tampilkan soal berdasarkan u_tempsoal
         if (empty($_GET['n'])) {
-            $qsoal = mysqli_query($con, "Select * from u_tempsoal where id_siswa = '$idsiswa' and id_jadwal = '$idjadwal' order by id_tempsoal desc limit 1");
+            $qsoal = mysqli_query($con, "Select * from u_tempsoal where id_siswa = '$idsiswa' and id_jadwal = '$idjadwal' order by id_tempsoal asc limit 1");
             $dtsoal = mysqli_fetch_array($qsoal);
             $angka = "1";
             // echo $dtsoal['id_soal'];
-           
+
         } else {
-            $number = base64_decode($_GET['n']);
-            $qsoal = mysqli_query($con, "Select * from u_tempsoal where id_siswa = '$idsiswa' and id_jadwal = '$idjadwal' and id_soal = '$number'");
+
+            $nosoal = $_GET['n'] - 1;
+            $qsoal = mysqli_query($con, "Select * from u_tempsoal where id_siswa = '$idsiswa' and id_jadwal = '$idjadwal' order by id_tempsoal asc limit $nosoal , 1 ");
             $dtsoal = mysqli_fetch_array($qsoal);
-            $tpno = explode("-", base64_decode($_GET['n']));
-            $angka = $tpno[0];
+            $angka = $nosoal + 1;
         }
 
         //jawab soal
-        if(!empty($_GET['ans']))
-        {
-            
+        if (!empty($_GET['ans'])) {
+
             $idsoal = $dtsoal['id_soal'];
             $idopsi = $_GET['ans'];
-            $qcekjawab = mysqli_query($con,"Select * from u_jawab where id_siswa = '$idsiswa' and id_soal = '$idsoal' and id_opsi='$idopsi'");
+            $qcekjawab = mysqli_query($con, "Select * from u_jawab where id_siswa = '$idsiswa' and id_soal = '$idsoal' and id_opsi='$idopsi'");
             $dtcekjawab = mysqli_fetch_array($qcekjawab);
-            if (empty($dtcekjawab[0]))
-            {
+            if (empty($dtcekjawab[0])) {
                 mysqli_query($con, "insert into u_jawab value('','$idsiswa','$idsoal','$idopsi') ");
-            }else
-            {
-                mysqli_query($con,"update u_jawab set id_opsi = '$idopsi' where id_siswa = '$idsiswa' and id_soal = '$idsoal'");
+            } else {
+                mysqli_query($con, "update u_jawab set id_opsi = '$idopsi' where id_siswa = '$idsiswa' and id_soal = '$idsoal'");
             }
         }
-        
-        
 
-        //keterangan posisi soal
-        
-    } else
-    {
+
+
+        //next dan prev
+        $next = $_GET['n'] + 1;
+        $prev = $_GET['n'] - 1;
+
+        if ($_GET['n'] <= 1) {
+            $disprev = "disabled";
+        }
+
+        if ($_GET['n'] == $jumlahsoal) {
+            $disnext = "disabled";
+        }
+    } else {
         echo "Ujian error";
         exit;
     }
-
-    
 }
 
 
@@ -101,25 +104,22 @@ if (empty($_SESSION['tryout'])) {
                     <div class="row mb-2">
                         <div class="col-md-12">
                             <?php
-                            $abjad = ['A','B','C','D','E'];
+                            $abjad = ['A', 'B', 'C', 'D', 'E'];
                             for ($i = 1; $i <= 5; $i++) {
 
                             ?>
                                 <table class="mb-3">
                                     <tr>
                                         <td style="width:5%" class="align-top">
-                                            <button onclick='window.location.href=""' class="btn btn-outline-primary rounded-pill btn-sm me-2"><?=$abjad[$i-1]?></button>
+                                            <button onclick='window.location.href=""' class="btn btn-outline-primary rounded-pill btn-sm me-2"><?= $abjad[$i - 1] ?></button>
                                         </td>
                                         <td>
-                                            <?= $soal->tpopsi($con, "opsi" . $i, $dtsoal['id_soal']) ?> 
+                                            <?= $soal->tpopsi($con, "opsi" . $i, $dtsoal['id_soal']) ?>
                                         </td>
                                     </tr>
                                 </table>
                             <?php
-
-
                             }
-
                             ?>
                         </div>
                     </div>
@@ -127,6 +127,12 @@ if (empty($_SESSION['tryout'])) {
 
 
 
+                </div>
+                <div class="card-footer">
+
+                    <button onclick="window.location.href='?p=soal&run=<?= $_GET['run'] ?>&n=<?= $_GET['n'] - 1 ?>'" class="btn btn-success rounded-pill <?= $disprev ?>">Sebelumnya</button>
+
+                    <button onclick="window.location.href='?p=soal&run=<?= $_GET['run'] ?>&n=<?= $_GET['n'] + 1 ?>'" class="btn btn-success rounded-pill <?= $disnext ?>">Berikutnya</button>
                 </div>
             </div>
         </div>
@@ -149,18 +155,14 @@ if (empty($_SESSION['tryout'])) {
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-12">
-
                                 <?php
-                                $no = 1;
-                                foreach ($soal->soaltempall($con, $idjadwal) as $nsoal) {
-                                    $ns = base64_encode($no . "-" . $nsoal['id_soal']);
+                                for ($i = 0; $i < $jumlahsoal; $i++) {
                                 ?>
-                                    <button class="btn btn-outline-primary mb-1" onclick="window.location.href='?p=soal&run=<?= $_GET['run'] ?>&n=<?= $ns ?>'"><?= $no ?></button>
-                                <?php
 
-                                    $no++;
-                                }
-                                ?>
+
+                                    <button class="btn btn-outline-primary mb-1" onclick="window.location.href='?p=soal&run=<?= $_GET['run'] ?>&n=<?= $i + 1 ?>'"><?= $i + 1; ?></button>
+                                <?php } ?>
+
                             </div>
                         </div>
 
