@@ -4,6 +4,7 @@ if (empty($_SESSION['email'])) {
     header('location:?p=login');
 } else {
     $useraktif = $peserta->detail($con, $_SESSION['email']);
+    $idsiswa = $useraktif['id_siswa'];
 }
 ?>
 

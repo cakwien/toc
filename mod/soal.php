@@ -40,14 +40,7 @@ class soal{
    {
       $q=mysqli_query($con, "select u_opsi.id_opsi, u_opsi.opsi from u_tempsoal join u_opsi on u_tempsoal.$ops = u_opsi.id_opsi where u_tempsoal.id_soal = $idsoal");
       $dt=mysqli_fetch_array($q);
-      if(!empty($dt[0]))
-      {
-         $tpopsi = $dt['opsi'];
-      }else
-      {
-         $tpopsi = "";
-      }
-      return $tpopsi;
+      return $dt;
    }
 
    function showsoal($con,$page)

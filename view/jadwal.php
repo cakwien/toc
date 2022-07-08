@@ -36,7 +36,26 @@
                                     <td><?= $soal->jumlahsoal($con, $row['id_modul']) ?></td>
                                     <td><?= $row['durasi'] ?> Menit</td>
                                     <td>
+
+                                    <?php
+                                    $ch = $ujian->cekhasil($con, $idsiswa, $row['id_jadwal']);
+                                    if($ch=="belum")
+                                    {
+                                        if ($now > $row['time_end'])
+                                        {
+                                            echo '<button class="btn btn-sm btn-danger disabled">Terlambat</button>';
+                                        }else
+                                        {
+                                            echo '<a href="?p=pre&siswa='.$idsiswa.'&jadwal='.$row['id_jadwal'].'&modul='.$row['id_modul'].'">Mulai</a>';
+                                        }
+                                    }
+                                    ?>
+
+
+
                                      <a href="?p=pre&siswa=<?=$useraktif['id_siswa']?>&jadwal=<?=$row['id_jadwal']?>&modul=<?=$row['id_modul']?>">Mulai</a>
+
+
                                         <!-- <button class="btn btn-sm btn-primary"><i class="bi-pencil"></i> Kerjakan</button> -->
                                     </td>
                                 </tr>

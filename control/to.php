@@ -3,6 +3,7 @@
 if(!empty($_GET['p']))
 {
     $p = $_GET['p'];
+    $now=time();
 
     if($p=="login")
     {
@@ -122,6 +123,8 @@ if(!empty($_GET['p']))
 
     elseif($p=="hasil")
     {
+
+        
         include('view/index.php');
     }
 

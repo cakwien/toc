@@ -42,6 +42,37 @@ class ujian{
             echo '<script>window.alert("Gagal masuk tryOut")</script>';
         }
     }
+
+    function cekhasil($con,$idsiswa,$idjadwal)
+    {
+        $q=mysqli_query($con,"select * from u_hasil where id_siswa = '$idsiswa' and id_jadwal = '$idjadwal'");
+        $dt = mysqli_num_rows($q);
+        if($dt > 1)
+        {
+            $set = "sudah";
+        }else
+        {
+            $set="belum";
+        }
+        return $set;
+    }
+
+    function jumlahjawab($con,$idsiswa,$idjadwal)
+    {
+        $q=mysqli_query($con,"select * from u_jawab where id_siswa='$idsiswa' and id_jadwal = '$idjadwal' ");
+        $dt=mysqli_num_rows($q);
+        return $dt;
+    }
+
+    function hasilujianallbysiswa($con,$idsiswa)
+    {
+        $list = array();
+        $q = mysqli_query($con, "select * from u_hasil join u_jadwal on u_hasil.id_jadwal = u_jadwal.id_jadwal where id_siswa = '$idsiswa'");
+        while ($dt = mysqli_fetch_array($q)) {
+            $list[] = $dt;
+        }
+        return $list;
+    }
 }
 
 ?>
