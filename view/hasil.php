@@ -33,6 +33,7 @@ $dthasil = $ujian->hasilujianallbysiswa($con, $idsiswa);
                             <?php
                             $no=1;
                             foreach ($dthasil as $row) {
+                                $idjadwal = $row['id_jadwal'];
                             ?>
                                 <tr>
                                     <td><?=$no?></td>
@@ -44,7 +45,7 @@ $dthasil = $ujian->hasilujianallbysiswa($con, $idsiswa);
                                     <td><?=$row['salah']?></td>
                                     <td><?=$row['nilai']?></td>
                                     <td>
-                                        <button class="btn btn-sm btn-primary"><i class="bi-search"></i></button>
+                                        <button onclick='window.location.href="?p=analisis&jadwal=<?=$idjadwal?>"' class="btn btn-sm btn-primary"><i class="bi-search"></i></button>
                                     </td>
                                 </tr>
                             <?php $no++; } ?>

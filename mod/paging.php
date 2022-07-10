@@ -18,6 +18,9 @@
             case "hasil";
                 require_once('view/hasil.php');
                 break;
+            case "analisis";
+                require_once('view/analisis.php');
+                break;
 
 
 

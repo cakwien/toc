@@ -28,33 +28,44 @@
                                 <tr>
                                     <td><?= $no ?></td>
                                     <td>
-                                        <span class="text-light bg-success ps-1 pe-1 rounded"><?= tgl($row['time_start']) . " - " . date('H:i', $row['time_start']) ?></span>
+                                        <span class="text-light bg-success ps-1 pe-1 rounded txtkecil"><?= tgl($row['time_start']) . " - " . date('H:i', $row['time_start']) ?></span>
                                         <br>
-                                        <span class="text-light bg-danger ps-1 pe-1 rounded"><?= tgl($row['time_end']) . " - " . date('H:i', $row['time_end']) ?></span>
+                                        <span class="text-light bg-danger ps-1 pe-1 rounded txtkecil"><?= tgl($row['time_end']) . " - " . date('H:i', $row['time_end']) ?></span>
                                     </td>
                                     <td><?= $row['jadwal'] ?></td>
                                     <td><?= $soal->jumlahsoal($con, $row['id_modul']) ?></td>
-                                    <td><?= $row['durasi'] ?> Menit</td>
+                                    <td><?= $row['durasi'] ?> Menit  <?=$ujian->cekhasil($con,$idsiswa,$row['id_jadwal'])?></td>
                                     <td>
 
-                                    <?php
-                                    $ch = $ujian->cekhasil($con, $idsiswa, $row['id_jadwal']);
-                                    if($ch=="belum")
-                                    {
-                                        if ($now > $row['time_end'])
-                                        {
-                                            echo '<button class="btn btn-sm btn-danger disabled">Terlambat</button>';
+                                        <?php
+                                        $idjadwal = $row['id_jadwal'];
+                                        $ch = $ujian->cekhasil($con, $idsiswa, $row['id_jadwal']);
+                                        if ($ch == "belum") {
+
+                                            $qcektempsoal = mysqli_query($con, "select * from u_tempsoal where id_siswa = '$idsiswa' and id_jadwal = $idjadwal");
+                                            $dtcektempsoal = mysqli_num_rows($qcektempsoal);
+
+                                            if ($dtcektempsoal < 1) {
+                                                if ($now > $row['time_end']) {
+                                                    echo '<button class="btn btn-sm btn-danger disabled">Terlambat</button>';
+                                                } else {
+                                                    echo '<a class="btn btn-sm btn-primary" href="?p=pre&siswa=' . $idsiswa . '&jadwal=' . $row['id_jadwal'] . '&modul=' . $row['id_modul'] . '">Mulai</a>';
+                                                }
+                                            }else
+                                            {
+                                                if ($now > $row['time_end']) {
+                                                    echo '<button class="btn btn-sm btn-success disabled">Selesai</button>';
+                                                } else {
+                                                    echo '<a class="btn btn-sm btn-primary" href="?p=pre&siswa=' . $idsiswa . '&jadwal=' . $row['id_jadwal'] . '&modul=' . $row['id_modul'] . '">Lanjutkan</a>';
+                                                }
+                                            }
                                         }else
                                         {
-                                            echo '<a href="?p=pre&siswa='.$idsiswa.'&jadwal='.$row['id_jadwal'].'&modul='.$row['id_modul'].'">Mulai</a>';
+                                            echo '<span class="btn btn-sm btn-success disabled"><i class="bi-check-circle"></i></span>';
                                         }
-                                    }
-                                    ?>
-
-
-
-                                     <a href="?p=pre&siswa=<?=$useraktif['id_siswa']?>&jadwal=<?=$row['id_jadwal']?>&modul=<?=$row['id_modul']?>">Mulai</a>
-
+                                        ?>
+                                        <!-- <a href="?p=pre&siswa=<?= $useraktif['id_siswa'] ?>&jadwal=<?= $row['id_jadwal'] ?>&modul=<?= $row['id_modul'] ?>">Mulai</a>
+ -->
 
                                         <!-- <button class="btn btn-sm btn-primary"><i class="bi-pencil"></i> Kerjakan</button> -->
                                     </td>

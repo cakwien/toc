@@ -47,7 +47,7 @@ class ujian{
     {
         $q=mysqli_query($con,"select * from u_hasil where id_siswa = '$idsiswa' and id_jadwal = '$idjadwal'");
         $dt = mysqli_num_rows($q);
-        if($dt > 1)
+        if($dt > 0)
         {
             $set = "sudah";
         }else

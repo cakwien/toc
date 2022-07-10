@@ -21,6 +21,9 @@ $crud = new Crud($con);
 include('mod/ujian.php');
 $ujian = new ujian;
 
+include('mod/analisis.php');
+$analisis = new analisis;
+
 
 
 // Routing Aplikasi

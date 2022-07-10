@@ -1,7 +1,19 @@
 <?php
+// session_start();
+
 if (empty($_SESSION['tryout'])) {
     header('location:?p=jadwal');
 } else {
+
+    if (!empty($_SESSION["waktu_start"])) {
+        $lewat = time() - $_SESSION['waktu_start'];
+        // $lewat = $_SESSION['waktu_start'];
+        // echo $lewat;
+    } else {
+        $_SESSION['waktu_start'] = time();
+        $lewat = 0;
+    }
+
     if (!empty($_GET['run'])) {
 
         $urlbasesoal = $_GET['run'];
@@ -9,7 +21,11 @@ if (empty($_SESSION['tryout'])) {
         $idjadwal = $run[1];
         $idmodul = $run[2];
         $idsiswa = $useraktif['id_siswa'];
-        
+
+        //detail jadwal
+        $qjadwal = mysqli_query($con, "Select * from u_jadwal where id_jadwal = '$idjadwal'");
+        $detjadwal = mysqli_fetch_array($qjadwal);
+
         //jumlahsoal
         $jumsoal = $soal->jumlahsoal($con, $idmodul);
         // echo $jumsoal[0];
@@ -35,14 +51,14 @@ if (empty($_SESSION['tryout'])) {
 
         // cek ada jawaban atau tidak
         $idsoal = $dtsoal['id_soal'];
-        $qcekjawab = mysqli_query($con, "Select * from u_jawab where id_siswa = '$idsiswa' and id_soal = '$idsoal'");
+        $qcekjawab = mysqli_query($con, "Select * from u_jawab where id_siswa = '$idsiswa' and id_soal = '$idsoal' and id_jadwal='$idjadwal'");
         $dtcekjawab = mysqli_fetch_array($qcekjawab);
 
         //jawab soal
         if (!empty($_GET['ans'])) {
             $idopsi = $_GET['ans'];
             $idjawab = $dtcekjawab['id_jawab'];
-
+            echo "kamu menjawab";
             if (empty($dtcekjawab[0])) {
                 $qpilihjawab = mysqli_query($con, "insert into u_jawab value('','$idsiswa','$idjadwal','$idsoal','$idopsi') ");
                 if ($qpilihjawab) {
@@ -72,14 +88,13 @@ if (empty($_SESSION['tryout'])) {
         }
 
         //kumpulkan ujian
-        if(!empty($_GET['selesai']))
-        {
+        if (!empty($_GET['selesai'])) {
             //jumlah jawaban benar
             $qbenar = mysqli_query($con, "select * from u_jawab join u_soal on u_jawab.id_soal = u_soal.id_soal join u_opsi on u_jawab.id_opsi = u_opsi.id_opsi where u_opsi.kunci = 'benar' and id_siswa = '$idsiswa' and id_jadwal = '$idjadwal'");
             $jumlahbenar = mysqli_num_rows($qbenar);
 
             //jumlah terjawab
-            $qterjawab = mysqli_query($con,"select * from u_jawab join u_soal on u_jawab.id_soal = u_soal.id_soal join u_opsi on u_jawab.id_opsi = u_opsi.id_opsi where id_siswa = '$idsiswa' and id_jadwal = '$idjadwal'");
+            $qterjawab = mysqli_query($con, "select * from u_jawab join u_soal on u_jawab.id_soal = u_soal.id_soal join u_opsi on u_jawab.id_opsi = u_opsi.id_opsi where id_siswa = '$idsiswa' and id_jadwal = '$idjadwal'");
             $jumlahterjawab = mysqli_num_rows($qterjawab);
 
             //jumlah jawaban salah
@@ -90,15 +105,12 @@ if (empty($_SESSION['tryout'])) {
             $nilaiakhir = $jumlahbenar * $nilaisoal;
             $waktu = time();
             //masukkan data
-            $qinputnilai = mysqli_query($con,"insert into u_hasil value('','$idsiswa','$idjadwal','$jumlahterjawab','$jumlahbenar','$jumlahsalah','$nilaiakhir','$waktu')");
-            if($qinputnilai)
-            {
+            $qinputnilai = mysqli_query($con, "insert into u_hasil value('','$idsiswa','$idjadwal','$jumlahterjawab','$jumlahbenar','$jumlahsalah','$nilaiakhir','$waktu')");
+            if ($qinputnilai) {
                 unset($_SESSION['tryout']);
-                header('location:?p=soal&run='.$urlbasesoal);
+                header('location:?p=soal&run=' . $urlbasesoal);
             }
-
         }
-
     } else {
         echo "Ujian error";
         exit;
@@ -113,6 +125,7 @@ if (empty($_SESSION['tryout'])) {
                 <div class="card-header">
                     <div class="float-start">
                         Soal Ke : <span class="fw-bold"><?= $angka ?></span>
+                        <span class="bg-success ps-2 pe-2 ms-3 text-light rounded-pill" id="timer"></span>
                     </div>
                     <div class="float-end">
                         <button data-bs-toggle="modal" data-bs-target="#daftarsoal" class="btn btn-primary btn-sm">Daftar Soal</button>
@@ -212,8 +225,38 @@ if (empty($_SESSION['tryout'])) {
 
             </div>
             <div class="modal-footer d-flex justify-content-between">
-                <button type="button" class="btn btn-danger"><i class="bi-reply"></i> Kumpulkan Ujian</button>
+                <button onclick="window.location.href='?p=soal&run=<?= $urlbasesoal ?>&selesai=ok'" class="btn btn-danger"><i class="bi-reply"></i> Kumpulkan Ujian</button>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+<script>
+    function waktuHabis() {
+        alert('waktu anda telah habis, ujian akan di tutup, semua hasil pekerjaan akan otomatis tersimpan...');
+        window.location = "?p=soal&run=<?= $_GET['run'] ?>&selesai=ok";
+    }
+
+    function hampirHabis(periods) {
+        if ($.countdown.periodsToSeconds(periods) <= 60) {
+            $(this).removeClass("text-light");
+            $(this).addClass("text-light bg-danger");
+        }
+    }
+
+
+    $(function() {
+        var waktu = <?= $detjadwal['durasi'] * 60 ?>;
+        var sisa_waktu = waktu - <?= $lewat ?>;
+        var longWayOff = sisa_waktu;
+        $("#timer").countdown({
+            until: longWayOff,
+            compact: true,
+            onExpiry: waktuHabis,
+            onTick: hampirHabis
+        });
+    })
+</script>

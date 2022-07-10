@@ -43,11 +43,7 @@ class soal{
       return $dt;
    }
 
-   function showsoal($con,$page)
-   {
-      
-      
-   }
+  
 
    
 
