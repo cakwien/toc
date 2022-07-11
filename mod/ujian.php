@@ -5,7 +5,7 @@ class ujian{
     function allujianbyrombel($con,$id_rombel)
     {
         $list=array();
-        $q=mysqli_query($con,"select * from u_jadwal join u_modul on u_jadwal.id_modul = u_modul.id_modul join rombel on u_jadwal.id_rombel = rombel.id_rombel where u_jadwal.id-rombel = '$id_rombel'");
+        $q=mysqli_query($con,"select * from u_jadwal join u_modul on u_jadwal.id_modul = u_modul.id_modul join rombel on u_jadwal.id_rombel = rombel.id_rombel where u_jadwal.id_rombel = '$id_rombel'");
         while($dt=mysqli_fetch_array($q))
         {
             $list[]=$dt;
@@ -68,6 +68,16 @@ class ujian{
     {
         $list = array();
         $q = mysqli_query($con, "select * from u_hasil join u_jadwal on u_hasil.id_jadwal = u_jadwal.id_jadwal where id_siswa = '$idsiswa'");
+        while ($dt = mysqli_fetch_array($q)) {
+            $list[] = $dt;
+        }
+        return $list;
+    }
+
+    function hasilujianbysiswa2($con,$idsiswa)
+    {
+        $list = array();
+        $q = mysqli_query($con, "select * from u_hasil right outer join u_jadwal on u_hasil.id_jadwal = u_jadwal.id_jadwal where u_hasil.id_siswa  = '$idsiswa'");
         while ($dt = mysqli_fetch_array($q)) {
             $list[] = $dt;
         }

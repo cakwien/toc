@@ -2,9 +2,6 @@
     <div class="row mt-2">
         <h5>Jadwal TryOut</h5>
     </div>
-
-
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -34,7 +31,7 @@
                                     </td>
                                     <td><?= $row['jadwal'] ?></td>
                                     <td><?= $soal->jumlahsoal($con, $row['id_modul']) ?></td>
-                                    <td><?= $row['durasi'] ?> Menit  <?=$ujian->cekhasil($con,$idsiswa,$row['id_jadwal'])?></td>
+                                    <td><?= $row['durasi'] ?> Menit </td>
                                     <td>
 
                                         <?php
@@ -47,27 +44,23 @@
 
                                             if ($dtcektempsoal < 1) {
                                                 if ($now > $row['time_end']) {
-                                                    echo '<button class="btn btn-sm btn-danger disabled">Terlambat</button>';
+                                                    echo '<button class="btn btn-sm btn-danger disabled"><i class="bi-x-circle"></i> Terlambat</button>';
                                                 } else {
-                                                    echo '<a class="btn btn-sm btn-primary" href="?p=pre&siswa=' . $idsiswa . '&jadwal=' . $row['id_jadwal'] . '&modul=' . $row['id_modul'] . '">Mulai</a>';
+                                                    echo '<a class="btn btn-sm btn-primary" href="?p=pre&siswa=' . $idsiswa . '&jadwal=' . $row['id_jadwal'] . '&modul=' . $row['id_modul'] . '"><i class="bi-pencil"></i> Mulai</a>';
                                                 }
                                             }else
                                             {
                                                 if ($now > $row['time_end']) {
                                                     echo '<button class="btn btn-sm btn-success disabled">Selesai</button>';
                                                 } else {
-                                                    echo '<a class="btn btn-sm btn-primary" href="?p=pre&siswa=' . $idsiswa . '&jadwal=' . $row['id_jadwal'] . '&modul=' . $row['id_modul'] . '">Lanjutkan</a>';
+                                                    echo '<a class="btn btn-sm btn-primary" href="?p=pre&siswa=' . $idsiswa . '&jadwal=' . $row['id_jadwal'] . '&modul=' . $row['id_modul'] . '"><i class="bi-pencil-square"></i> Lanjutkan</a>';
                                                 }
                                             }
                                         }else
                                         {
-                                            echo '<span class="btn btn-sm btn-success disabled"><i class="bi-check-circle"></i></span>';
+                                            echo '<span class="btn btn-sm btn-success disabled"><i class="bi-check-circle"></i> Selesai</span>';
                                         }
                                         ?>
-                                        <!-- <a href="?p=pre&siswa=<?= $useraktif['id_siswa'] ?>&jadwal=<?= $row['id_jadwal'] ?>&modul=<?= $row['id_modul'] ?>">Mulai</a>
- -->
-
-                                        <!-- <button class="btn btn-sm btn-primary"><i class="bi-pencil"></i> Kerjakan</button> -->
                                     </td>
                                 </tr>
                             <?php $no++;

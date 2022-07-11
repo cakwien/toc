@@ -22,13 +22,14 @@ if (empty($_SESSION['email'])) {
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="tambah.css">
     <link rel="stylesheet" href="bi\font\bootstrap-icons.css">
-    
+
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="js/countdown/js/jquery.plugin.min.js"></script>
     <script src="js/countdown/js/jquery.countdown.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
     <style>
         .txtkecilbgt {
@@ -57,8 +58,14 @@ if (empty($_SESSION['email'])) {
                     <li class="nav-item">
                         <a class="nav-link" href="?p=jadwal">Tryout</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="?p=hasil">Hasil</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Rekap
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="?p=hasil">Hasil</a></li>
+                            <li><a class="dropdown-item" href="?p=grafik">Grafik Pencapaian</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>

@@ -137,6 +137,11 @@ if (!empty($_GET['p'])) {
         
         include('view/index.php');
     }
+
+    elseif($p=="grafik")
+    {
+        include('view/index.php');
+    }
     
     else {
         include('view/index.php');

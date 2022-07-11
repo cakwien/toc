@@ -18,6 +18,20 @@ class jadwal{
         return $dt;
     }
 
+    function jumlahjadwal($con,$idrombel)
+    {
+        $q = mysqli_query($con, "Select * from u_jadwal where id_rombel = '$idrombel'");
+        $dt = mysqli_num_rows($q);
+        return $dt;
+    }
+
+    function jumlahtryoutselesai($con,$idsiswa)
+    {
+        $q = mysqli_query($con, "Select * from u_hasil where id_siswa = '$idsiswa'");
+        $dt = mysqli_num_rows($q);
+        return $dt;
+    }
+
     
 
     
