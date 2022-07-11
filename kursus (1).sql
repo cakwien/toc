@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 07, 2022 at 11:35 AM
+-- Generation Time: Jul 11, 2022 at 04:18 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -399,6 +399,30 @@ INSERT INTO `tentor` (`id_tentor`, `nm_tentor`, `alamat`, `tp_lahir`, `tgl_lahir
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `u_hasil`
+--
+
+CREATE TABLE `u_hasil` (
+  `id_hasil` int(11) NOT NULL,
+  `id_siswa` int(11) NOT NULL,
+  `id_jadwal` int(11) NOT NULL,
+  `jawab` int(11) NOT NULL,
+  `benar` int(11) NOT NULL,
+  `salah` int(11) NOT NULL,
+  `nilai` int(11) NOT NULL,
+  `waktu` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `u_hasil`
+--
+
+INSERT INTO `u_hasil` (`id_hasil`, `id_siswa`, `id_jadwal`, `jawab`, `benar`, `salah`, `nilai`, `waktu`) VALUES
+(1, 1, 7, 10, 10, 0, 100, 1657476528);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `u_jadwal`
 --
 
@@ -417,7 +441,8 @@ CREATE TABLE `u_jadwal` (
 --
 
 INSERT INTO `u_jadwal` (`id_jadwal`, `jadwal`, `id_modul`, `id_rombel`, `time_start`, `time_end`, `durasi`) VALUES
-(6, 'Percobaan tryout 1', 3, 1, 1656319080, 1656578280, 30);
+(6, 'Percobaan tryout 1', 3, 1, 1656319080, 1656578280, 30),
+(7, 'Percobaan Tryout 2', 3, 1, 1657316160, 1657920960, 10);
 
 -- --------------------------------------------------------
 
@@ -428,9 +453,26 @@ INSERT INTO `u_jadwal` (`id_jadwal`, `jadwal`, `id_modul`, `id_rombel`, `time_st
 CREATE TABLE `u_jawab` (
   `id_jawab` int(11) NOT NULL,
   `id_siswa` int(11) NOT NULL,
+  `id_jadwal` int(11) NOT NULL,
   `id_soal` int(11) NOT NULL,
   `id_opsi` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `u_jawab`
+--
+
+INSERT INTO `u_jawab` (`id_jawab`, `id_siswa`, `id_jadwal`, `id_soal`, `id_opsi`) VALUES
+(1, 1, 7, 4, 16),
+(2, 1, 7, 7, 31),
+(3, 1, 7, 1, 1),
+(4, 1, 7, 9, 41),
+(5, 1, 7, 6, 26),
+(6, 1, 7, 2, 6),
+(7, 1, 7, 3, 11),
+(8, 1, 7, 5, 21),
+(9, 1, 7, 8, 36),
+(10, 1, 7, 10, 46);
 
 -- --------------------------------------------------------
 
@@ -479,7 +521,47 @@ INSERT INTO `u_opsi` (`id_opsi`, `id_soal`, `opsi`, `kunci`) VALUES
 (7, 2, '<p>binatang dari indonesia</p>\r\n', 'salah'),
 (8, 2, '<p>binatang dari amerika</p>\r\n', 'salah'),
 (9, 2, '<p>binatang dari rusia</p>\r\n', 'salah'),
-(10, 2, '<p>binatang dari china</p>\r\n', 'salah');
+(10, 2, '<p>binatang dari china</p>\r\n', 'salah'),
+(11, 3, '<p>dua</p>\r\n', 'benar'),
+(12, 3, '<p>lima</p>\r\n', 'salah'),
+(13, 3, '<p>empat</p>\r\n', 'salah'),
+(14, 3, '<p>tiga</p>\r\n', 'salah'),
+(15, 3, '<p>sepuluh</p>\r\n', 'salah'),
+(16, 4, '<p>mouse</p>\r\n', 'benar'),
+(17, 4, '<p>speaker</p>\r\n', 'salah'),
+(18, 4, '<p>monitor</p>\r\n', 'salah'),
+(19, 4, '<p>lampu</p>\r\n', 'salah'),
+(20, 4, '<p>heatshink</p>\r\n', 'salah'),
+(21, 5, '<p>4</p>\r\n', 'benar'),
+(22, 5, '<p>5</p>\r\n', 'salah'),
+(23, 5, '<p>6</p>\r\n', 'salah'),
+(24, 5, '<p>7</p>\r\n', 'salah'),
+(25, 5, '<p>8</p>\r\n', 'salah'),
+(26, 6, '<p>duta</p>\r\n', 'benar'),
+(27, 6, '<p>eross</p>\r\n', 'salah'),
+(28, 6, '<p>adam</p>\r\n', 'salah'),
+(29, 6, '<p>bryan</p>\r\n', 'salah'),
+(30, 6, '<p>sakti</p>\r\n', 'salah'),
+(31, 7, '<p>arsyad kalief alfarizqi</p>\r\n', 'benar'),
+(32, 7, '<p>arsyaaaad</p>\r\n', 'salah'),
+(33, 7, '<p>acaad</p>\r\n', 'salah'),
+(34, 7, '<p>dedek thole</p>\r\n', 'salah'),
+(35, 7, '<p>thole</p>\r\n', 'salah'),
+(36, 8, '<p>Endah Kholifatus Shalihah</p>\r\n', 'benar'),
+(37, 8, '<p>Bunda Endah</p>\r\n', 'salah'),
+(38, 8, '<p>Mbak En</p>\r\n', 'salah'),
+(39, 8, '<p>endahndung</p>\r\n', 'salah'),
+(40, 8, '<p>ndaaah</p>\r\n', 'salah'),
+(41, 9, '<p>yaa ndak tau kok tanya saya</p>\r\n', 'benar'),
+(42, 9, '<p>iyaa menmang harus gitu</p>\r\n', 'salah'),
+(43, 9, '<p>yaa ndak tau lagi</p>\r\n', 'salah'),
+(44, 9, '<p>yaa gimana ya</p>\r\n', 'salah'),
+(45, 9, '<p>ygy</p>\r\n', 'salah'),
+(46, 10, '<p>Sekolah menengah Kejuruan</p>\r\n', 'benar'),
+(47, 10, '<p>Sekolah Menengah Keamanan</p>\r\n', 'salah'),
+(48, 10, '<p>Sekolah Menimba Keilmuan</p>\r\n', 'salah'),
+(49, 10, '<p>Sekolah Menengah</p>\r\n', 'salah'),
+(50, 10, '<p>ndak tau pak</p>\r\n', 'salah');
 
 -- --------------------------------------------------------
 
@@ -499,7 +581,15 @@ CREATE TABLE `u_soal` (
 
 INSERT INTO `u_soal` (`id_soal`, `id_modul`, `soal`) VALUES
 (1, 3, '<p>soal 1</p>\r\n'),
-(2, 3, '<p>apa yang dimaksud dengan <strong>KOALA ???</strong></p>\r\n');
+(2, 3, '<p>apa yang dimaksud dengan <strong>KOALA ???</strong></p>\r\n'),
+(3, 3, '<p>satu di tambah satu sama dfengan</p>\r\n'),
+(4, 3, '<p>contoh dari perangkat input pada komputer adalah</p>\r\n'),
+(5, 3, '<p>berapakah jumlah kaki pada kucing?</p>\r\n'),
+(6, 3, '<p>siapakah nama vokalis sheila on 7 ?</p>\r\n'),
+(7, 3, '<p>siapa nama lengkap arsyad ?</p>\r\n'),
+(8, 3, '<p>siapa nama bunda arsyad?</p>\r\n'),
+(9, 3, '<p>mengapa diperlukan ketekunan dalam sekolah di SMKN 1 Banyuwangi?</p>\r\n'),
+(10, 3, '<p>apa kepanjangan dari SMK?</p>\r\n');
 
 -- --------------------------------------------------------
 
@@ -525,8 +615,16 @@ CREATE TABLE `u_tempsoal` (
 --
 
 INSERT INTO `u_tempsoal` (`id_tempsoal`, `id_siswa`, `id_jadwal`, `id_modul`, `id_soal`, `opsi1`, `opsi2`, `opsi3`, `opsi4`, `opsi5`) VALUES
-(1, 1, 6, 3, 2, 6, 8, 9, 10, 7),
-(2, 1, 6, 3, 1, 1, 4, 2, 3, 5);
+(1, 1, 7, 3, 4, 19, 16, 17, 20, 18),
+(2, 1, 7, 3, 7, 34, 35, 33, 31, 32),
+(3, 1, 7, 3, 1, 4, 1, 5, 2, 3),
+(4, 1, 7, 3, 9, 43, 45, 44, 41, 42),
+(5, 1, 7, 3, 6, 30, 26, 28, 29, 27),
+(6, 1, 7, 3, 2, 8, 7, 9, 10, 6),
+(7, 1, 7, 3, 3, 15, 13, 14, 12, 11),
+(8, 1, 7, 3, 5, 21, 24, 23, 25, 22),
+(9, 1, 7, 3, 8, 38, 40, 39, 36, 37),
+(10, 1, 7, 3, 10, 46, 50, 49, 48, 47);
 
 -- --------------------------------------------------------
 
@@ -547,7 +645,7 @@ CREATE TABLE `u_testrun` (
 --
 
 INSERT INTO `u_testrun` (`id_tesrun`, `id_siswa`, `id_jadwal`, `start`, `sisa`) VALUES
-(1, 1, 6, 1657186054, 0);
+(6, 1, 7, 1657475923, 0);
 
 --
 -- Indexes for dumped tables
@@ -660,6 +758,12 @@ ALTER TABLE `tarif_kelas`
 --
 ALTER TABLE `tentor`
   ADD PRIMARY KEY (`id_tentor`);
+
+--
+-- Indexes for table `u_hasil`
+--
+ALTER TABLE `u_hasil`
+  ADD PRIMARY KEY (`id_hasil`);
 
 --
 -- Indexes for table `u_jadwal`
@@ -816,16 +920,22 @@ ALTER TABLE `tentor`
   MODIFY `id_tentor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT for table `u_hasil`
+--
+ALTER TABLE `u_hasil`
+  MODIFY `id_hasil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `u_jadwal`
 --
 ALTER TABLE `u_jadwal`
-  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `u_jawab`
 --
 ALTER TABLE `u_jawab`
-  MODIFY `id_jawab` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_jawab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `u_modul`
@@ -837,25 +947,25 @@ ALTER TABLE `u_modul`
 -- AUTO_INCREMENT for table `u_opsi`
 --
 ALTER TABLE `u_opsi`
-  MODIFY `id_opsi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_opsi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `u_soal`
 --
 ALTER TABLE `u_soal`
-  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `u_tempsoal`
 --
 ALTER TABLE `u_tempsoal`
-  MODIFY `id_tempsoal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_tempsoal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `u_testrun`
 --
 ALTER TABLE `u_testrun`
-  MODIFY `id_tesrun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_tesrun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
