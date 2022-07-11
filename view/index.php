@@ -76,7 +76,7 @@ if (empty($_SESSION['email'])) {
                         <?= $useraktif['email'] ?>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <li><a class="dropdown-item" href="#"> <i class="bi-gear"></i> Setting</a></li>
+                        <li><a class="dropdown-item" href="?p=bio"> <i class="bi-gear"></i> Setting</a></li>
                         <li><a class="dropdown-item fw-bold text-danger" href="?p=logout"> <i class="bi-box-arrow-right
 "></i> Logout</a></li>
                     </ul>

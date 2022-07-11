@@ -24,6 +24,9 @@
             case "grafik";
                 require_once('view/grafik.php');
                 break;
+            case "bio";
+                require_once('view/bio.php');
+                break;
 
 
 

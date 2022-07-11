@@ -142,6 +142,11 @@ if (!empty($_GET['p'])) {
     {
         include('view/index.php');
     }
+
+    elseif($p=="bio")
+    {
+        include('view/index.php');
+    }
     
     else {
         include('view/index.php');
