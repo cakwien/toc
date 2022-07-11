@@ -27,6 +27,9 @@ $kelas = new kelas;
 include('mod/jadwal.php');
 $jadwal = new jadwal;
 
+include('mod/hasil.php');
+$hasil = new hasil;
+
 include('control/vpanel.php');
 
 ?>

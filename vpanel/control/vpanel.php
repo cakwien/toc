@@ -5,15 +5,23 @@ if(!empty($_GET['p']))
 
     if($p=="login")
     {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+        
 
-        if(!empty($username) && !empty($password))
+        if(!empty($_POST['username']) && !empty($_POST['password']))
         {
+            $username = $_POST['username'];
+            $password = $_POST['password'];
             $user->login($con,$username,$password);
         }
         
         include('view/login.php');
+    }
+
+    elseif($p=="logout")
+    {
+        session_start();
+        session_destroy();
+        header('location:?p=login');
     }
 
     elseif($p=="modul")
@@ -33,10 +41,6 @@ if(!empty($_GET['p']))
         {
             $update=$modul->update($con,$_POST['modul'],$_POST['id']);
         }
-
-
-
-       
 
         include('view/index.php');
     }
@@ -130,6 +134,35 @@ if(!empty($_GET['p']))
 
     elseif($p=="progres")
     {
+        include('view/index.php');
+    }
+
+    elseif($p=="hasil")
+    {
+        if(empty($_GET['jadwal']))
+        {
+            $dthasil = $hasil->all($con);
+        }
+        else
+        {
+            $dthasil = $hasil->allbyjadwal($con,$_GET['jadwal']);
+        }
+
+        
+        include('view/index.php');
+    }
+
+    elseif($p=="analisis")
+    {
+        if(!empty($_GET['jadwal']) && !empty($_GET['siswa']))
+        {
+            $jd = $jadwal->index($con, $_GET['jadwal']);
+            $dthasil = $hasil->index($con, $_GET['siswa'], $_GET['jadwal']);
+            $dtjawaban = $hasil->jawaban2($con,$_GET['siswa'],$_GET['jadwal']);
+            $jumsoal = $soal->jumlahsoal($con,$jd['id_modul']);
+
+        }
+        
         include('view/index.php');
     }
 

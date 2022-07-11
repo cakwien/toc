@@ -30,6 +30,14 @@ class jadwal{
         return $list;
     }
 
+    function index($con,$idjadwal)
+    {
+        $q=mysqli_query($con,"Select * from u_jadwal where id_jadwal = '$idjadwal'");
+        $dt=mysqli_fetch_array($q);
+        return $dt;
+    }
+
+    
    
 
     function insert($con,$jadwal,$idmodul,$idrombel,$start,$end,$durasi)

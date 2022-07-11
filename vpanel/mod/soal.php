@@ -31,5 +31,12 @@ class soal{
     {
         mysqli_query($con,"insert into u_soal values('','$modul','$soal')");
     }
+
+    function jumlahsoal($con,$idmodul)
+    {
+        $q=mysqli_query($con,"Select * from u_soal where id_modul = '$idmodul'");
+        $dt=mysqli_num_rows($q);
+        return $dt;
+    }
 }
 ?>
