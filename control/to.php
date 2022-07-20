@@ -38,7 +38,7 @@ if (!empty($_GET['p'])) {
             if ($dtcektempsoal > 0) {
                 header('location:?p=pre&jadwal=' . base64_encode($id_jadwal));
             } else {
-
+                //masukkan data acak soal ke table u_tempsoal
                 $carisoal = mysqli_query($con, "select * from u_soal where id_modul = $id_modul order by rand()");
                 while ($dtcs = mysqli_fetch_array($carisoal)) {
                     $dtcssoal = $dtcs['id_soal'];
@@ -91,7 +91,9 @@ if (!empty($_GET['p'])) {
                 session_start();
                 $_SESSION['tryout'] = $_GET['kerjakan'];
                 $_SESSION['waktu_start'] = $dttestrun['start'];
+                // $_SESSION['waktu_start'] = time();
                 $getrun = base64_encode("tryout-" . $kerjakan[1] . "-" . $kerjakan[2]); //tryout-idjadwal-idmodul
+                mysqli_query($con,"update u_testrun set start ='$start' where id_siswa = '$sis' and id_jadwal = '$jd'");
                 header('location:?p=soal&run=' . $getrun . '&n=1'); // isinya idjadwal dan idmodul
             } else {
                 $q = mysqli_query($con, "insert into u_testrun values('','$kerjakan[0]','$kerjakan[1]','$start','')");
@@ -106,9 +108,7 @@ if (!empty($_GET['p'])) {
                 }
             }
         }
-
-
-        $qjadwalkerjakan = mysqli_query($con, "select * from u_jadwal  where id_jadwal = " . base64_decode($_GET['jadwal']));
+        $qjadwalkerjakan = mysqli_query($con, "select * from u_jadwal where id_jadwal = " . base64_decode($_GET['jadwal']));
         $dtjadwalkerjakan = mysqli_fetch_array($qjadwalkerjakan);
 
         // jumlahsoal
@@ -118,8 +118,6 @@ if (!empty($_GET['p'])) {
 
         include('view/index.php');
     } elseif ($p == "soal") {
-
-
 
         include('view/index.php');
     } elseif ($p == "hasil") {

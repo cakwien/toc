@@ -58,7 +58,7 @@ if (empty($_SESSION['tryout'])) {
         if (!empty($_GET['ans'])) {
             $idopsi = $_GET['ans'];
             $idjawab = $dtcekjawab['id_jawab'];
-            echo "kamu menjawab";
+            // echo "kamu menjawab";
             if (empty($dtcekjawab[0])) {
                 $qpilihjawab = mysqli_query($con, "insert into u_jawab value('','$idsiswa','$idjadwal','$idsoal','$idopsi') ");
                 if ($qpilihjawab) {
@@ -71,20 +71,6 @@ if (empty($_SESSION['tryout'])) {
                     header('location:?p=soal&run=' . $urlbasesoal . '&n=' . $_GET['n']);
                 }
             }
-        }
-
-        //next dan prev
-        $next = $_GET['n'] + 1;
-        $prev = $_GET['n'] - 1;
-        $disprev = "";
-        $disnext = "";
-
-        if ($_GET['n'] <= 1) {
-            $disprev = "disabled";
-        }
-
-        if ($_GET['n'] == $jumlahsoal) {
-            $disnext = "disabled";
         }
 
         //kumpulkan ujian
@@ -108,9 +94,26 @@ if (empty($_SESSION['tryout'])) {
             $qinputnilai = mysqli_query($con, "insert into u_hasil value('','$idsiswa','$idjadwal','$jumlahterjawab','$jumlahbenar','$jumlahsalah','$nilaiakhir','$waktu')");
             if ($qinputnilai) {
                 unset($_SESSION['tryout']);
-                header('location:?p=soal&run=' . $urlbasesoal);
+                unset($_SESSION['waktu_start']);
+                header('location:?p=soal&run='.$urlbasesoal);
             }
         }
+
+        //next dan prev
+        $next = $_GET['n'] + 1;
+        $prev = $_GET['n'] - 1;
+        $disprev = "";
+        $disnext = "";
+
+        if ($_GET['n'] <= 1) {
+            $disprev = "disabled";
+        }
+
+        if ($_GET['n'] == $jumlahsoal) {
+            $disnext = "disabled";
+        }
+
+       
     } else {
         echo "Ujian error";
         exit;

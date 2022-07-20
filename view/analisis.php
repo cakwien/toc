@@ -3,8 +3,17 @@ $dtsoal = $analisis->allsoalbysiswabyjadwal($con, $idjadwal, $idsiswa);
 $dtjadwal = $jadwal->index($con, $idjadwal);
 $dthasil = $analisis->hasil($con, $idjadwal, $idsiswa);
 
-$qjs = mysqli_query($con,"select * from u_soal where id_modul =". $dtjadwal['id_modul']);
+$qjs = mysqli_query($con, "select * from u_soal where id_modul =" . $dtjadwal['id_modul']);
 $js = mysqli_num_rows($qjs);
+
+function cekkosong($test)
+{
+    if (!empty($test)) {
+        echo $test;
+    } else {
+        echo "-";
+    }
+}
 
 ?>
 
@@ -23,7 +32,7 @@ $js = mysqli_num_rows($qjs);
                 <div class="card-body">
                     <div class="form-group">
                         <label for="">Event</label>
-                        <input type="text" class="form-control form-control-sm" value="<?=$dtjadwal['jadwal']?>" readonly>
+                        <input type="text" class="form-control form-control-sm" value="<?= $dtjadwal['jadwal'] ?>" readonly>
                     </div>
                     <div class="form-group mt-2">
                         <table class="table table-bordered">
@@ -38,11 +47,11 @@ $js = mysqli_num_rows($qjs);
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><?=$js?></td>
-                                    <td><?=$dthasil['jawab']?></td>
-                                    <td><?=$dthasil['benar']?></td>
-                                    <td><?=$dthasil['salah']?></td>
-                                    <td><?=$dthasil['nilai']?></td>
+                                    <td><?= $js ?></td>
+                                    <td><?= $dthasil['jawab'] ?></td>
+                                    <td><?= $dthasil['benar'] ?></td>
+                                    <td><?= $dthasil['salah'] ?></td>
+                                    <td><?= $dthasil['nilai'] ?></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -73,35 +82,79 @@ $js = mysqli_num_rows($qjs);
                                 $jwb =  $analisis->jawaban($con, $idsiswa, $_GET['jadwal'], $row['id_soal']);
                             ?>
                                 <tr>
-                                    <td <?php if($jwb['kunci']=='benar'){echo 'rowspan="2"';} else {echo 'rowspan="3"';} ?> ><?= $no ?></td>
+                                    <td <?php
+                                        if(empty($jwb['kunci']))
+                                        {
+                                            echo 'rowspan="3"';
+                                        }else
+                                        {
+                                            if ($jwb['kunci'] == 'benar') {
+                                                echo 'rowspan="2"';
+                                            } else {
+                                                echo 'rowspan="3"';
+                                            }
+                                        }
+                                         ?>>
+
+
+                                        <?= $no ?>
+
+                                    </td>
                                     <td style="background-color:#EAF6F6" colspan="3"><?= $row['soal'] ?></td>
                                 </tr>
                                 <tr>
-                                    <td style="width:10%" class="fw-bold">Jawaban</td>
-                                    <td style="width:5%" class="fw-bold text-center fs-5">
+                                    <td style="width:5%;" class="fw-bold">Jawaban</td>
+                                    <td style="width:5%;" class="fw-bold text-center fs-5">
                                         <?php
-                                        if ($jwb['kunci'] == 'benar') {
-                                            echo '<i class="text-success bi-check-circle-fill"></i>';
-                                        }else
-                                        {
-                                            echo '<i class="text-danger bi-x-circle-fill"></i>';
+                                        if (empty($jwb['kunci'])) {
+                                            echo '<i class="text-secondary bi-x-circle-fill"></i>';
+                                        } else {
+                                            if ($jwb['kunci'] == 'benar') {
+                                                echo '<i class="text-success bi-check-circle-fill"></i>';
+                                            } else {
+                                                echo '<i class="text-danger bi-x-circle-fill"></i>';
+                                            }
                                         }
+
+
                                         ?></td>
                                     <td class="fw-bold">
-                                        <?=$jwb['opsi']?>
+                                       <?php
+                                        if(!empty($jwb['opsi']))
+                                        {
+                                            echo $jwb['opsi'];
+                                        }else
+                                        {
+                                            echo "Tidak Terjawab";
+                                        }
+                                       ?>
                                     </td>
                                 </tr>
                                 <?php
-                                    if($jwb['kunci']=='salah')
-                                    {
+                                if(!empty($jwb['kunci']))
+                                {
+                                    if ($jwb['kunci'] == 'salah') {
+                                        $ob = $analisis->opsibenar($con, $row['id_soal']);
+                                        echo '<tr>
+                                                <td style="width:5%" class="fw-bold">Kunci</td>
+                                                
+                                                <td style="width:5%" colspan="2" class="fw-bold"> '.$ob['opsi'].' </td>
+                                                
+                                              </tr>';
+                                    }
+                                }
+                                else
+                                {
                                     $ob = $analisis->opsibenar($con, $row['id_soal']);
+                                    echo '<tr>
+                                                <td style="width:5%" class="fw-bold">Kunci</td>
+                                                
+                                                <td style="width:5%" colspan="2"  class="fw-bold"> ' . $ob['opsi'] . ' </td>
+                                                
+                                              </tr>';
+                                }
+
                                 ?>
-                                <tr>
-                                    <td style="width:20%" class="fw-bold">Kunci</td>
-                                    <td style="width:5%" class="fw-bold"> <?=$ob['opsi']?>  </td>
-                                    <td class="fw-bold"></td>
-                                </tr>
-                                <?php } ?>
 
                             <?php $no++;
                             } ?>
