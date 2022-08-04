@@ -152,7 +152,7 @@ function cekkosong($test)
                                                 <td style="width:5%" colspan="2"  class="fw-bold"> ' . $ob['opsi'] . ' </td>
                                                 
                                               </tr>';
-                                }
+                                }  
 
                                 ?>
 

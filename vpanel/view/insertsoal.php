@@ -7,27 +7,24 @@
     <div class="row">
         <div class="col-md-6 mt-1">
             <label for="" class="fw-bold">Soal</label>
-            <textarea name="soal" id="soal"></textarea>
+            <textarea name="soal" id="summernote1" style="height:140px;" class=""></textarea>
         </div>
         <div class="col-md-6 mt-1">
             <label for="">Opsi Benar</label>
-            <textarea name="opsibenar" rows="2" id="opsi1"></textarea>
-        </div>
-        <div class="col-md-6 mt-1">
+            <!-- <textarea name="opsibenar" rows="2" id="summernote"></textarea> -->
+            <textarea name="opsibenar" rows="2" id="summernote2"></textarea>
+
             <label for="">Opsi 1</label>
-            <textarea name="opsisalah[]" rows="2" id="opsi2"></textarea>
-        </div>
-        <div class="col-md-6 mt-1">
+            <textarea name="opsisalah[]" rows="2" id="summernote3"></textarea>
+
             <label for="">Opsi 2</label>
-            <textarea name="opsisalah[]" rows="2" id="opsi3"></textarea>
-        </div>
-        <div class="col-md-6 mt-1">
+            <textarea name="opsisalah[]" rows="2" id="summernote4"></textarea>
+
             <label for="">Opsi 3</label>
-            <textarea name="opsisalah[]" rows="2" id="opsi4"></textarea>
-        </div>
-        <div class="col-md-6 mt-1">
+            <textarea name="opsisalah[]" rows="2" id="summernote5"></textarea>
+
             <label for="">Opsi 4</label>
-            <textarea name="opsisalah[]" rows="2" id="opsi5"></textarea>
+            <textarea name="opsisalah[]" rows="2" id="summernote6"></textarea>
         </div>
     </div>
     <div class="row">
@@ -39,11 +36,22 @@
 </form>
 
 
-<script>
+<!-- <script>
     CKEDITOR.replace('soal');
     CKEDITOR.replace('opsi1');
     CKEDITOR.replace('opsi2');
     CKEDITOR.replace('opsi3');
     CKEDITOR.replace('opsi4');
     CKEDITOR.replace('opsi5');
+</script> -->
+
+<script>
+    $(document).ready(function() {
+        $('#summernote1').summernote();
+        $('#summernote2').summernote();
+        $('#summernote3').summernote();
+        $('#summernote4').summernote();
+        $('#summernote5').summernote();
+        $('#summernote6').summernote();
+    });
 </script>

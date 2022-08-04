@@ -30,10 +30,12 @@ class analisis{
 
     function opsibenar($con,$idsoal)
     {
-        $q=mysqli_query($con,"Select opsi from u_jawab join u_opsi on u_jawab.id_opsi = u_opsi.id_opsi where u_jawab.id_soal = '$idsoal' and kunci = 'benar'  limit 1");
+        // $q=mysqli_query($con,"Select opsi from u_jawab join u_opsi on u_jawab.id_opsi = u_opsi.id_opsi where u_jawab.id_soal = '$idsoal' and kunci = 'benar'  limit 1");
+        $q=mysqli_query($con,"Select opsi from u_opsi where id_soal = '$idsoal' and kunci = 'benar'  limit 1");
         $dt = mysqli_fetch_array($q);
         return $dt;
     }
+  
 
     function index($con,$idopsi)
     {

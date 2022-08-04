@@ -57,6 +57,12 @@ if(!empty($_GET['p']))
         }
 
 
+        if(!empty($_GET['del']))
+        {
+            $soal->hapus($con,$_GET['del']);
+        }
+
+
 
 
         include('view/index.php');

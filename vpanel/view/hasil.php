@@ -13,6 +13,8 @@
                 </select>
             </div>
             <div class="card-body">
+                <span class="btn btn-sm btn-danger"><i class="bi-reply"></i></span> : Kerjakan Ulang
+                <span class="btn btn-sm btn-primary"><i class="bi-search"></i></span> : Analisis
                 <table id="datatabel" class="table table-bordered">
                     <thead>
                         <tr>
@@ -44,7 +46,8 @@
                                 <td><?= $row['nilai'] ?></td>
                                 <td></td>
                                 <td>
-                                    <button onclick="window.location.href='?p=analisis&jadwal=<?=$row['id_jadwal']?>&siswa=<?=$row['id_siswa']?>'" class="btn btn-primary btn-sm"><i class="bi-search"></i> Analisis</button>
+                                    <button onclick="window.location.href='?p=analisis&jadwal=<?=$row['id_jadwal']?>&siswa=<?=$row['id_siswa']?>'" class="btn btn-primary btn-sm"><i class="bi-search"></i></button>
+                                    <button class="btn btn-danger btn-sm"><i class="bi-reply"></i></button>
                                 </td>
                             </tr>
                         <?php $no++;

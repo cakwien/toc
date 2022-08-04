@@ -38,5 +38,21 @@ class soal{
         $dt=mysqli_num_rows($q);
         return $dt;
     }
+
+    function hapus($con,$idsoal)
+    {
+        $q=mysqli_query($con,"delete from u_soal where id_soal = '$idsoal'");
+        if($q)
+        {
+            $q=mysqli_query($con,"delete from u_opsi where id_soal = '$idsoal'");
+            if($q)
+            {
+                header('location:?p=soal&hapus=ok');
+            }else
+            {
+                header('location:?p=soal&hapus=fail');
+            }
+        }
+    }
 }
 ?>
