@@ -21,5 +21,17 @@ class peserta{
         $dt = mysqli_fetch_array($q);
         return $dt;
     }
+
+    function input($con,$nama,$alamat,$tplahir,$tgllahir,$nohp,$email,$asalsekolah,$foto,$password)
+    {
+        $q=mysqli_query($con,"insert into siswa value('','$nama','$alamat','$tplahir','$tgllahir','$nohp','$asalsekolah','$foto','$password')");
+        if($q)
+        {
+            header('location:?p=peserta&input=ok');
+        }else
+        {
+            header('location:?p=peserta&input=fail');
+        }
+    }
 }
 ?>
