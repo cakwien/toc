@@ -5,13 +5,12 @@ if(!empty($_GET['p']))
 
     if($p=="login")
     {
-        
-
         if(!empty($_POST['username']) && !empty($_POST['password']))
         {
             $username = $_POST['username'];
             $password = $_POST['password'];
-            $user->login($con,$username,$password);
+            $login=$user->login($con,$username,$password);
+           
         }
         
         include('view/login.php');

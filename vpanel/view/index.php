@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(empty($_SESSION['admintoc']))
+{
+    header('location:?p=login');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
