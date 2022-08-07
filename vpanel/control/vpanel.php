@@ -14,7 +14,9 @@ if (!empty($_GET['p'])) {
         session_start();
         session_destroy();
         header('location:?p=login');
+
     } elseif ($p == "modul") {
+
         if (isset($_POST['simpanmodul'])) {
             $nmmodul = $_POST['nmmodul'];
             $input = $modul->insert($con, $nmmodul);

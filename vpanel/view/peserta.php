@@ -39,8 +39,8 @@
                                 <td><?= $row['nm_kelas'] ?></td>
                                 <td><?= $row['rombel'] ?></td>
                                 <td>
+                                    <button data-bs-toggle="modal" data-bs-target="#edit" data-id="<?= $row['id_siswa'] ?>" class="btn btn-sm btn-success"><i class="bi-pencil"></i></button>
                                     <a href="?p=peserta&del=<?= $id ?>" class="btn btn-danger btn-sm"><i class="bi-trash"></i></a>
-                                    <button data-bs-toggle="modal" data-bs-target="#edit" data-id="<?= $row['id_siswa'] ?>" class="btn btn-sm btn-primary"><i class="bi-pencil"></i></button>
                                 </td>
                             </tr>
                         <?php

@@ -17,6 +17,13 @@ class modul{
         return $dt;
     }
 
+    function jumlahsoal($con,$modul)
+    {
+        $q=mysqli_Query($con,"select * from u_soal where id_modul = '$modul'");
+        $dt = mysqli_num_rows($q);
+        return $dt;
+    }
+
     function insert($con,$modul)
     {
         $q=mysqli_query($con,"insert into u_modul value('','$modul')");

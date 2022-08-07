@@ -12,6 +12,7 @@
                         <tr>
                             <th>#</th>
                             <th>Modul</th>
+                            <th>Jumlah Soal</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
@@ -23,9 +24,18 @@
                             <tr>
                                 <td style="width:10%;"><?= $no ?></td>
                                 <td><?= $row[1] ?></td>
+                                <td><?= $modul->jumlahsoal($con, $row[0]) ?></td>
                                 <td style="width:20%;">
-                                    <button class="btn btn-sm btn-success" data-id="<?= $row[0] ?>" data-bs-target="#editmodul" data-bs-toggle="modal">Edit</button>
-                                    <a href="?p=modul&del=<?= $row[0] ?>" onclick="return confirm('Apakah anda yakin menghapus data modul ini?');" class="btn btn-sm btn-danger">Hapus</a>
+                                    <button class="btn btn-sm btn-success" data-id="<?= $row[0] ?>" data-bs-target="#editmodul" data-bs-toggle="modal"><i class="bi-pencil"></i></button>
+                                    <?php
+                                    $js = $modul->jumlahsoal($con, $row[0]);
+                                    if ($js > 0) {
+                                    ?>
+                                        <a href="?p=modul&del=<?= $row[0] ?>" onclick="return confirm('Di dalam modul ini terdapat soal-soal,Menghapus modul ini akan menghapus soal-soal di dalamnya,Apakah anda yakin menghapus data modul ini?');" class="btn btn-sm btn-danger"><i class="bi-trash"></i></a>
+                                    <?php } else { ?>
+                                        <a href="?p=modul&del=<?= $row[0] ?>" onclick="return confirm('Apakah anda yakin menghapus data modul ini?');" class="btn btn-sm btn-danger"><i class="bi-trash"></i></a>
+                                    <?php } ?>
+
                                 </td>
                             </tr>
                         <?php $no++;
