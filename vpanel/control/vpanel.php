@@ -61,9 +61,6 @@ if(!empty($_GET['p']))
             $soal->hapus($con,$_GET['del']);
         }
 
-
-
-
         include('view/index.php');
     }
 
@@ -75,6 +72,12 @@ if(!empty($_GET['p']))
        }else
        {
         $listpeserta = $peserta->all($con);
+       }
+
+
+       if(!empty($_POST['inputpeserta']))
+       {
+            $input=$peserta->input($con, $_POST['nama'], $_POST['alamat'], $_POST['tplahir'], $_POST['tgllahir'], $_POST['nohp'], $_POST['email'], $_POST['asalsekolah'], '', $_POST['password']);
        }
        
         
@@ -139,8 +142,16 @@ if(!empty($_GET['p']))
 
     elseif($p=="progres")
     {
+        if(!empty($_GET['jadwal']))
+        {
+            $listprogress = $ujian->progressbyjadwal($con,$_GET['jadwal']);
+        }else
+        {
+            $listprogress = $ujian->progress($con);
+        }
+        
         include('view/index.php');
-    }
+    }   
 
     elseif($p=="hasil")
     {

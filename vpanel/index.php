@@ -30,6 +30,9 @@ $jadwal = new jadwal;
 include('mod/hasil.php');
 $hasil = new hasil;
 
+include('mod/ujian.php');
+$ujian = new ujian;
+
 include('control/vpanel.php');
 
 ?>

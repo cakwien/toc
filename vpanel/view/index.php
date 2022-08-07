@@ -19,6 +19,7 @@ if(empty($_SESSION['admintoc']))
     <link rel="stylesheet" href="asset/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     <link href="summernote/summernote.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
 
 
 

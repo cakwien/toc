@@ -11,16 +11,30 @@
                             <th>#</th>
                             <th>Nama Peserta</th>
                             <th>Jadwal</th>
-                            <th>Progress</th>
+                            <th>Start</th>
+                            <th>Progress</th> 
+                            <th>Opsi</th> 
                         </tr>
                     </thead>
                     <tbody>
+                        <?php
+                            $no=1;
+                            foreach($listprogress as $row)
+                            {
+                        ?>
                         <tr>
+                            <td><?=$no?></td>
+                            <td><?=$row['nm_siswa']?></td>
+                            <td><?=$row['jadwal']?></td>
+                            <td><?=date('d/m/Y H:i:s',$row['start'])?></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>
+                                <button class="btn btn-danger btn-sm"><i class="bi-trash"></i></button>
+                                <button class="btn btn-primary btn-sm"><i class="bi-search"></i></button>
+                            </td>
                         </tr>
+                        <?php $no++; } ?>
+
                     </tbody>
                 </table>
             </div>
