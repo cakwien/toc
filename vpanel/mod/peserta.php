@@ -29,9 +29,9 @@ class peserta{
         return $list;
     }
 
-    function input($con,$nm_siswa,$alamat,$tp_lahir,$tgl_lahir,$no_hp,$email,$asal_sekolah,$foto,$password)
+    function input($con,$nm_siswa,$alamat,$tp_lahir,$tgl_lahir,$no_hp,$email,$asal_sekolah,$password)
     {
-        $q=mysqli_query($con,"insert into siswa values('','$nm_siswa','$alamat','$tp_lahir','$tgl_lahir','$no_hp','$email','$asal_sekolah','$foto',md5('$password'))");
+        $q=mysqli_query($con,"insert into siswa values('','$nm_siswa','$alamat','$tp_lahir','$tgl_lahir','$no_hp','$email','$asal_sekolah','',md5('$password'))");
         if($q)
         {
             header('location:?p=peserta&insert=ok');

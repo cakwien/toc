@@ -23,12 +23,14 @@
                             <th>Email</th>
                             <th>Kelas</th>
                             <th>Rombel</th>
+                            <th>Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $no = 1;
                         foreach ($listpeserta as $row) {
+                            $id = $row['id_siswa'];
                         ?>
                             <tr>
                                 <td><?= $no ?></td>
@@ -36,6 +38,10 @@
                                 <td><?= $row['email'] ?></td>
                                 <td><?= $row['nm_kelas'] ?></td>
                                 <td><?= $row['rombel'] ?></td>
+                                <td>
+                                    <a href="?p=peserta&del=<?= $id ?>" class="btn btn-danger btn-sm"><i class="bi-trash"></i></a>
+                                    <button data-bs-toggle="modal" data-bs-target="#edit" data-id="<?= $row['id_siswa'] ?>" class="btn btn-sm btn-primary"><i class="bi-pencil"></i></button>
+                                </td>
                             </tr>
                         <?php
                             $no++;
@@ -74,7 +80,7 @@
                                     <input type="text" name="tplahir" class="form-control" id="">
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="tgllahir" class="form-control" id="">
+                                    <input type="date" name="tgllahir" class="form-control" id="">
                                 </div>
                             </div>
                         </div>
@@ -91,12 +97,22 @@
                             <input type="email" name="email" class="form-control" id="">
                         </div>
                         <div class="form-group mt-2">
+                            <label for="">Kelas</label>
+                            <select name="rombel" class="form-select" id="">
+                                <?php
+                                foreach ($kelas->allrombel($con) as $row) {
+                                ?>
+                                    <option value="<?= $row['id_rombel'] ?>"><?= $row['nm_kelas'] . " " . $row['rombel'] ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="form-group mt-2">
                             <label for="">Password</label>
                             <input type="password" name="password1" class="form-control" id="">
                         </div>
                         <div class="form-group mt-2">
                             <label for="">Konfirmasi Password</label>
-                            <input type="password" name="password" class="form-control" id="">
+                            <input type="password" name="password2" class="form-control" id="">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -107,4 +123,44 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Peserta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" method="post">
+                    <div class="modal-body">
+                        <div class="modal-data"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi-x-square"></i> Batal</button>
+                        <button type="submit" name="updatepeserta" class="btn btn-primary"><i class="bi-save2"></i> Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#edit').on('show.bs.modal', function(e) {
+            var getDetail = $(e.relatedTarget).data('id');
+            /* fungsi AJAX untuk melakukan fetch data */
+            $.ajax({
+                type: 'post',
+                url: 'view/editpeserta.php',
+                /* detail per identifier ditampung pada berkas detail.php yang berada di folder application/view */
+                data: 'getDetail=' + getDetail,
+                /* memanggil fungsi getDetail dan mengirimkannya */
+                success: function(data) {
+                    $('.modal-data').html(data);
+                    /* menampilkan data dalam bentuk dokumen HTML */
+                }
+            });
+        });
+    });
+</script>
