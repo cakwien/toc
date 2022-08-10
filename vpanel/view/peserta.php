@@ -12,7 +12,7 @@
                     ?>
                 </select>
 
-                <button data-bs-toggle="modal" data-bs-target="#input" class="btn btn-primary float-end">Tambah</button>
+                <button data-bs-toggle="modal" data-bs-target="#input" class="btn btn-primary float-end"><i class="bi-person-plus-fill"></i></button>
             </div>
             <div class="card-body">
                 <table id="datatabel" class="table table-bordered table-hover table-striped">

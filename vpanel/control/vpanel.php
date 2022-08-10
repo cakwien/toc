@@ -214,6 +214,10 @@ if (!empty($_GET['p'])) {
 
         include('view/index.php');
     }
+    elseif($p=="kelas")
+    {
+        include('view/index.php');
+    }
 } else {
     include('view/index.php');
 }

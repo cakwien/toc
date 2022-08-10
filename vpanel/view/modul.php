@@ -4,7 +4,7 @@
             <div class="card-header">
                 Data Modul Tryout
 
-                <button data-bs-toggle="modal" data-bs-target="#tbmodal" class="btn btn-primary btn-sm float-end">Tambah</button>
+                <button data-bs-toggle="modal" data-bs-target="#tbmodal" class="btn btn-primary float-end"><i class="bi-folder-plus"></i></button>
             </div>
             <div class="card-body">
                 <table id="datatabel" class="table table-bordered table-striped table-hover">
@@ -31,6 +31,7 @@
                                     $js = $modul->jumlahsoal($con, $row[0]);
                                     if ($js > 0) {
                                     ?>
+                                        <a href="?p=modul&det=<?= $row[0] ?>" class="btn btn-sm btn-info"><i class="bi-search"></i></a>
                                         <a href="?p=modul&del=<?= $row[0] ?>" onclick="return confirm('Di dalam modul ini terdapat soal-soal,Menghapus modul ini akan menghapus soal-soal di dalamnya,Apakah anda yakin menghapus data modul ini?');" class="btn btn-sm btn-danger"><i class="bi-trash"></i></a>
                                     <?php } else { ?>
                                         <a href="?p=modul&del=<?= $row[0] ?>" onclick="return confirm('Apakah anda yakin menghapus data modul ini?');" class="btn btn-sm btn-danger"><i class="bi-trash"></i></a>

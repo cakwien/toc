@@ -78,3 +78,9 @@ function sel($a,$b)
     }
     return $ret;
 }
+
+function msg($msg,$dir)
+{
+    $ms = '<script>window.alert("'.$msg.'"); window.location.href="'.$dir.'"</srcipt>';
+    return $ms;
+}

@@ -3,7 +3,7 @@ class soal{
     function all($con)
     {
         $list = array();
-        $q = mysqli_query($con, "select * from u_soal");
+        $q = mysqli_query($con, "select * from u_soal join u_modul on u_soal.id_modul = u_modul.id_modul");
         while ($dt = mysqli_fetch_array($q)) {
             $list[] = $dt;
         }
@@ -13,7 +13,7 @@ class soal{
     function soalbymodul($con,$modul)
     {
         $list = array();
-        $q = mysqli_query($con, "select * from u_soal where id_modul = $modul");
+        $q = mysqli_query($con, "select * from u_soal join u_modul on u_soal.id_modul = u_modul.id_modul where u_soal.id_modul = $modul");
         while ($dt = mysqli_fetch_array($q)) {
             $list[] = $dt;
         }

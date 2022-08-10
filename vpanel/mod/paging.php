@@ -12,10 +12,10 @@ if(!empty($p))
    elseif($p=="progres")    {    require_once('view/progres.php');      }
    elseif($p=="hasil")      {    require_once('view/hasil.php');        }
    elseif($p=="analisis")   {    require_once('view/analisis.php');     }
+   elseif($p=="kelas")      {    require_once('view/kelas.php');        }
 }
 else
 {
     require_once('view/dash.php');
 }
-
-?>
+ ?>

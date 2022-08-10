@@ -25,6 +25,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Modul</th>
                             <th>Soal</th>
                             <th>Jawaban</th>
                             <th>Opsi</th>
@@ -34,12 +35,11 @@
                         <?php
                         $no = 1;
 
-
-
                         foreach ($listsoal as $row) {
                         ?>
                             <tr>
                                 <td style="width:10%;"><?= $no ?></td>
+                                <td><?= $row['modul'] ?></td>
                                 <td style="width:40%;"><?= $row['soal'] ?></td>
                                 <td><?= $opsi->opsibenarbysoal($con, $row[0]) ?></td>
                                 <td style="width:20%">
@@ -62,16 +62,13 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Soal</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="modal-data"></div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+
             </div>
         </div>
     </div>
@@ -81,16 +78,18 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Soal</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="modal-data1"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                <form action="" method="post">
+                    <div class="modal-body">
+                        <div class="modal-data1"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" name="updatesoal" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -125,6 +124,4 @@
             });
         });
     });
-
-
 </script>

@@ -22,6 +22,7 @@ if (!empty($_POST['getDetail'])) {
         <div class="form-group">
             <label for="">Soal</label>
             <textarea name="soal" id="summernotesoal" cols="30" rows="10"><?= $dts['soal'] ?></textarea>
+            <input type="hidden" name="modul" value="<?=$dts['id_modul']?>">
         </div>
 
         <div class="form-group mt-3">
