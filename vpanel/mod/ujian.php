@@ -21,5 +21,17 @@ class ujian{
         }
         return $list;
     }
+
+    function allprogress($con)
+    {
+        $list = array();
+        $q = mysqli_query($con, "select * from u_jadwal join rombel on u_jadwal.id_rombel = rombel.id_rombel join kelas_siswa on rombel.id_rombel = kelas_siswa.id_rombel join siswa on kelas_siswa.id_siswa = siswa.id_siswa");
+        while ($dt = mysqli_fetch_array($q)) {
+            $list[] = $dt;
+        }
+        return $list;
+    }
+
+    
 }
 ?>

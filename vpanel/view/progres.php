@@ -19,7 +19,7 @@
                     <tbody>
                         <?php
                             $no=1;
-                            foreach($listprogress as $row)
+                            foreach($ujian->allprogress($con) as $row)
                             {
                         ?>
                         <tr>
