@@ -191,7 +191,7 @@ if (!empty($_GET['p'])) {
         if (!empty($_GET['jadwal'])) {
             $listprogress = $ujian->progressbyjadwal($con, $_GET['jadwal']);
         } else {
-            $listprogress = $ujian->progress($con);
+            $listprogress = $ujian->allprogress($con);
         }
 
         include('view/index.php');

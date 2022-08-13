@@ -15,7 +15,7 @@ class ujian{
     function progressbyjadwal($con,$idjadwal)
     {
         $list = array();
-        $q = mysqli_query($con, "select * from u_testrun join u_jadwal on u_testrun.id_jadwal = u_jadwal.id_jadwal join siswa on u_testrun.id_siswa = siswa.id_siswa where u_testrun.id_jadwal = '$idjadwal'");
+        $q = mysqli_query($con, "select * from u_testrun join u_jadwal on u_testrun.id_jadwal = u_jadwal.id_jadwal join siswa on u_testrun.id_siswa = siswa.id_siswa join kelas_siswa on siswa.id_siswa = kelas_siswa.id_siswa join rombel on kelas_siswa.id_rombel = rombel.id_rombel join kelas on rombel.id_kelas = kelas.id_kelas where u_testrun.id_jadwal = '$idjadwal'");
         while ($dt = mysqli_fetch_array($q)) {
             $list[] = $dt;
         }
@@ -25,7 +25,7 @@ class ujian{
     function allprogress($con)
     {
         $list = array();
-        $q = mysqli_query($con, "select * from u_jadwal join rombel on u_jadwal.id_rombel = rombel.id_rombel join kelas_siswa on rombel.id_rombel = kelas_siswa.id_rombel join siswa on kelas_siswa.id_siswa = siswa.id_siswa");
+        $q = mysqli_query($con, "select * from u_testrun join u_jadwal on u_testrun.id_jadwal = u_jadwal.id_jadwal join siswa on u_testrun.id_siswa = siswa.id_siswa join kelas_siswa on siswa.id_siswa = kelas_siswa.id_siswa join rombel on kelas_siswa.id_rombel = rombel.id_rombel join kelas on rombel.id_kelas = kelas.id_kelas");
         while ($dt = mysqli_fetch_array($q)) {
             $list[] = $dt;
         }
