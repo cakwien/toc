@@ -13,5 +13,11 @@ class user{
         }
     }
     
+    function index($con,$admin)
+    {
+        $q=mysqli_query($con,"Select * from admin where username = '$admin'");
+        $dt = mysqli_fetch_array($q);
+        return $dt;
+    }
 }
 ?>

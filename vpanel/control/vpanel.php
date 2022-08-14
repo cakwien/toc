@@ -218,6 +218,72 @@ if (!empty($_GET['p'])) {
     {
         include('view/index.php');
     }
+
+    elseif($p=="admin")
+    {
+        if(empty($_GET['edit']))
+        {
+            $ro="readonly";
+        }else
+        {
+            $ro="";
+        }
+
+        if(isset($_POST['updateadmin']))
+        {
+            $nama = $_POST['nama'];
+            $username = $_POST['username'];
+            $idadmin = $_POST['id'];
+            $q=mysqli_query($con,"update admin set nm_admin = '$nama', username = '$username' where id_admin = $idadmin");
+            if($q)
+            {
+                header('location:?p=admin&update=ok');
+            }else
+            {
+                header('location:?p=admin&update=fail');
+            }
+        }
+
+        if(isset($_POST['updatepass']))
+        {
+            $paslama = $_POST['passwordlama'];
+            $pas1 = $_POST['password1'];
+            $pas2 = $_POST['password2'];
+            $idpas = $_POST['idpas'];
+
+            $qcekpas = mysqli_query($con,"select * from admin where id_admin = '$idpas'");
+            $dt = mysqli_fetch_array($qcekpas);
+
+            if(md5($paslama) == $dt['password'])
+            {
+                if($pas1 == $pas2)
+                {
+                    $q=mysqli_query($con,"update admin set password = md5('$pas2')");
+                    if($q)
+                    {
+                        header('location:?p=admin&pas=ok');
+                    }
+                    else
+                    {
+                        header('location:?p=admin&pas=fail1');
+                    }
+                }else
+                {
+                    header('location:?p=admin&pas=1n2notsame');
+                }
+            }else
+            {
+                header('location:?p=admin&pas=lamanotsame');
+            }
+        }
+
+
+
+
+        
+
+        include('view/index.php');
+    }
 } else {
     include('view/index.php');
 }

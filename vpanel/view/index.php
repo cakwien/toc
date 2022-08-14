@@ -3,6 +3,10 @@ session_start();
 if(empty($_SESSION['admintoc']))
 {
     header('location:?p=login');
+}else
+{
+    $dataadmin=$user->index($con,$_SESSION['admintoc']);
+    $idadmin = $dataadmin[0];
 }
 ?>
 
@@ -94,8 +98,8 @@ if(empty($_SESSION['admintoc']))
                             User
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Setting</a></li>
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                            <li><a class="dropdown-item" href="?p=admin">Setting</a></li>
+                            <li><a class="dropdown-item" href="?p=logout">Logout</a></li>
                         </ul>
                     </li>
 

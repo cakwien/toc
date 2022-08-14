@@ -13,6 +13,7 @@ if(!empty($p))
    elseif($p=="hasil")      {    require_once('view/hasil.php');        }
    elseif($p=="analisis")   {    require_once('view/analisis.php');     }
    elseif($p=="kelas")      {    require_once('view/kelas.php');        }
+   elseif($p=="admin")      {    require_once('view/admin.php');        }
 }
 else
 {
