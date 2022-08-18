@@ -44,9 +44,18 @@
                                 <td><?= $row['benar'] ?></td>
                                 <td><?= $row['salah'] ?></td>
                                 <td><?= $row['nilai'] ?></td>
-                                <td></td>
                                 <td>
-                                    <button onclick="window.location.href='?p=analisis&jadwal=<?=$row['id_jadwal']?>&siswa=<?=$row['id_siswa']?>'" class="btn btn-primary btn-sm"><i class="bi-search"></i></button>
+                                    <?php
+                                    $tstart = $ujian->progresbyidjadwal($con, $row['id_jadwal'], $row['id_siswa']);
+
+                                    echo durasi($tstart['start'], $row['waktu']);
+
+                                    ?>
+
+
+                                </td>
+                                <td>
+                                    <button onclick="window.location.href='?p=analisis&jadwal=<?= $row['id_jadwal'] ?>&siswa=<?= $row['id_siswa'] ?>'" class="btn btn-primary btn-sm"><i class="bi-search"></i></button>
                                     <button class="btn btn-danger btn-sm"><i class="bi-reply"></i></button>
                                 </td>
                             </tr>

@@ -2,7 +2,7 @@
 class opsi{
     function insert($con,$soal,$opsi,$kunci)
     {
-        mysqli_query($con,"insert into u_opsi values('','$soal','$opsi','$kunci')");
+        mysqli_query($con,"insert into u_opsi values(NULL,'$soal','$opsi','$kunci')");
     }
 
     function opsibenarbysoal($con,$soal)

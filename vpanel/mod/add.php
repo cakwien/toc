@@ -84,3 +84,16 @@ function msg($msg,$dir)
     $ms = '<script>window.alert("'.$msg.'"); window.location.href="'.$dir.'"</srcipt>';
     return $ms;
 }
+
+function durasi($start,$end)
+{
+    $tstart = date("Y-m-d h:i:sa",$start);
+    $tend = date("Y-m-d h:i:sa",$end);
+    //echo $waktustart;
+    //echo $waktuend;
+
+    $datetime1 = new DateTime($tstart); //start time
+    $datetime2 = new DateTime($tend); //end time
+    $durasi = $datetime1->diff($datetime2);
+    echo $durasi->format('%H : %i : %s ');
+}

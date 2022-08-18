@@ -74,7 +74,7 @@ if (!empty($_GET['p'])) {
                     $email = $_POST['email'];
                     $password = $_POST['password2'];
 
-                    $qinsiswa = mysqli_query($con, "insert into siswa values('','$nama','$alamat','$tplahir','$tgllahir','$nohp','$email','$asalsekolah','',md5('$password'))");
+                    $qinsiswa = mysqli_query($con, "insert into siswa values(NULL,'$nama','$alamat','$tplahir','$tgllahir','$nohp','$email','$asalsekolah','',md5('$password'))");
 
                     // $input = $peserta->input($con, $_POST['nama'], $_POST['alamat'], $_POST['tplahir'], $_POST['tgllahir'], $_POST['nohp'], $_POST['email'], $_POST['asalsekolah'], $_POST['password2']);
 
@@ -82,7 +82,7 @@ if (!empty($_GET['p'])) {
                         $q = mysqli_query($con, "Select * from siswa where nm_siswa ='" . $_POST['nama'] . "' and email = '" . $_POST['email'] . "'");
                         $dt1 = mysqli_fetch_array($q);
 
-                        $qinputrombel = mysqli_query($con, "insert into kelas_siswa value('','" . $dt1['id_siswa'] . "','99','" . $_POST['rombel'] . "','0','0','1')");
+                        $qinputrombel = mysqli_query($con, "insert into kelas_siswa value(NULL,'" . $dt1['id_siswa'] . "','99','" . $_POST['rombel'] . "','0','0','1')");
                         if ($qinputrombel) {
                             header('location:?p=peserta&input=' . $dt1['id_siswa']);
                         } else {

@@ -29,7 +29,7 @@ class soal{
 
     function insert($con,$modul,$soal)
     {
-        mysqli_query($con,"insert into u_soal values('','$modul','$soal')");
+        mysqli_query($con,"insert into u_soal values(NULL,'$modul','$soal')");
     }
 
     function jumlahsoal($con,$idmodul)

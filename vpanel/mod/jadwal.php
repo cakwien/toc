@@ -42,7 +42,7 @@ class jadwal{
 
     function insert($con,$jadwal,$idmodul,$idrombel,$start,$end,$durasi)
     {
-        $q = mysqli_query($con, "insert into u_jadwal values('','$jadwal','$idmodul','$idrombel','$start','$end',$durasi)");
+        $q = mysqli_query($con, "insert into u_jadwal values(NULL,'$jadwal','$idmodul','$idrombel','$start','$end',$durasi)");
         if ($q) {
             header('location:?p=jadwal&msg=jadwalok');
         } else {

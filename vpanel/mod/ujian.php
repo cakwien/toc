@@ -32,6 +32,13 @@ class ujian{
         return $list;
     }
 
+    function progresbyidjadwal($con,$jadwal,$id)
+    {
+        $q=mysqli_query($con,"Select * from u_testrun where id_jadwal = '$jadwal' and id_siswa = '$id'");
+        $dt = mysqli_fetch_array($q);
+        return $dt;
+    }
+
     
 }
 ?>
