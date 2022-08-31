@@ -54,7 +54,7 @@ if (!empty($_GET['p'])) {
                     $opsi4 = $opsiarray[3]['id_opsi'];
                     $opsi5 = $opsiarray[4]['id_opsi'];
 
-                    $qtempsoal = mysqli_query($con, "insert into u_tempsoal value('','$id_siswa','$id_jadwal','$id_modul','$dtcssoal','$opsi1','$opsi2','$opsi3','$opsi4','$opsi5')");
+                    $qtempsoal = mysqli_query($con, "insert into u_tempsoal value(NULL,'$id_siswa','$id_jadwal','$id_modul','$dtcssoal','$opsi1','$opsi2','$opsi3','$opsi4','$opsi5')");
 
                     if ($qtempsoal) {
                         header('location:?p=pre&jadwal=' . base64_encode($id_jadwal));
@@ -96,7 +96,7 @@ if (!empty($_GET['p'])) {
                 mysqli_query($con,"update u_testrun set start ='$start' where id_siswa = '$sis' and id_jadwal = '$jd'");
                 header('location:?p=soal&run=' . $getrun . '&n=1'); // isinya idjadwal dan idmodul
             } else {
-                $q = mysqli_query($con, "insert into u_testrun values('','$kerjakan[0]','$kerjakan[1]','$start','')");
+                $q = mysqli_query($con, "insert into u_testrun values(NULL,'$kerjakan[0]','$kerjakan[1]','$start','')");
                 if ($q) {
                     session_start();
                     $_SESSION['tryout'] = $_GET['kerjakan'];

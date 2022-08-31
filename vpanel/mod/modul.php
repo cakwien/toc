@@ -26,7 +26,7 @@ class modul{
 
     function insert($con,$modul)
     {
-        $q=mysqli_query($con,"insert into u_modul value('','$modul')");
+        $q=mysqli_query($con,"insert into u_modul value(NULL,'$modul')");
         if($q)
         {
             header('location:?p=modul&msg=ok');

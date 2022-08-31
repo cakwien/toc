@@ -8,7 +8,7 @@ class peserta{
         {
             session_start();
             $_SESSION['email'] = $username;
-            header('location:../toc');
+            header('location:/..');
         }else
         {
             header('location:?p=login&msg=loginfailed');
@@ -24,7 +24,7 @@ class peserta{
 
     function input($con,$nama,$alamat,$tplahir,$tgllahir,$nohp,$email,$asalsekolah,$foto,$password)
     {
-        $q=mysqli_query($con,"insert into siswa value('','$nama','$alamat','$tplahir','$tgllahir','$nohp','$asalsekolah','$foto','$password')");
+        $q=mysqli_query($con,"insert into siswa value(NULL,'$nama','$alamat','$tplahir','$tgllahir','$nohp','$asalsekolah','$foto','$password')");
         if($q)
         {
             header('location:?p=peserta&input=ok');

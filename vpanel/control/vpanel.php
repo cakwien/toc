@@ -158,14 +158,19 @@ if (!empty($_GET['p'])) {
 
 
         include('view/index.php');
-    } elseif ($p == "insoal") {
+    } 
+    
+    
+    
+    
+    elseif ($p == "insoal") {
 
         if (isset($_POST['simpansoal'])) {
             $insoal = $_POST['soal'];
             $idmodul = $_GET['modul'];
             $opsi1 = $_POST['opsibenar'];
             $kunci = "benar";
-            $q = mysqli_query($con, "insert into u_soal value('','$idmodul','$insoal')");
+            $q = mysqli_query($con, "insert into u_soal value(NULL,'$idmodul','$insoal')");
             if ($q) {
                 $qsoal = mysqli_query($con, "select * from u_soal where soal = '$insoal' and id_modul = '$idmodul' ");
                 $dtqsoal = mysqli_fetch_array($qsoal);
@@ -173,11 +178,11 @@ if (!empty($_GET['p'])) {
                 $idsoal = $dtqsoal[0];
 
                 if (!empty($dtqsoal[0])) {
-                    $inputopsi = mysqli_query($con, "insert into u_opsi values('','$idsoal','$opsi1','benar')");
+                    $inputopsi = mysqli_query($con, "insert into u_opsi values(NULL,'$idsoal','$opsi1','benar')");
                     if ($inputopsi) {
                         $opsisalah = $_POST['opsisalah'];
                         foreach ($opsisalah as $opsalah) {
-                            mysqli_query($con, "insert into u_opsi values('','$idsoal','$opsalah','salah')");
+                            mysqli_query($con, "insert into u_opsi values(NULL,'$idsoal','$opsalah','salah')");
                         }
                     }
                 }

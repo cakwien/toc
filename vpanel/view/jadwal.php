@@ -31,14 +31,13 @@
                                 <td><?= $row['modul'] ?></td>
                                 <td>
                                     <?php
-                                    foreach ($jadwal->allrombel($con, $row['jadwal']) as $kl) 
-                                    {
-                                        echo '<span class="bg-danger text-light p-1 rounded-pill">'.$kl['nm_kelas'] . ' - ' . $kl['rombel']."</span>&nbsp;";
+                                    foreach ($jadwal->allrombel($con, $row['jadwal']) as $kl) {
+                                        echo '<span class="bg-danger text-light p-1 rounded-pill">' . $kl['nm_kelas'] . ' - ' . $kl['rombel'] . "</span>&nbsp;";
                                     }
                                     ?>
                                 </td>
                                 <td>
-                                    <button class="btn btn-sm btn-success">Edit</button>
+                                    <button class="btn btn-sm btn-success" data-id="<?=$row['id_jadwal']?>" data-bs-toggle="modal" data-bs-target="#edit">Edit</button>
                                     <button class="btn btn-sm btn-danger">Hapus</button>
                                 </td>
                             </tr>
@@ -120,3 +119,43 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Jadwal Tryout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" method="post">
+                <div class="modal-body">
+                    <div class="modal-data"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button name="simpanjadwal" type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#edit').on('show.bs.modal', function(e) {
+            var getDetail = $(e.relatedTarget).data('id');
+            /* fungsi AJAX untuk melakukan fetch data */
+            $.ajax({
+                type: 'post',
+                url: 'view/editjadwal.php',
+                /* detail per identifier ditampung pada berkas detail.php yang berada di folder application/view */
+                data: 'getDetail=' + getDetail,
+                /* memanggil fungsi getDetail dan mengirimkannya */
+                success: function(data) {
+                    $('.modal-data').html(data);
+                    /* menampilkan data dalam bentuk dokumen HTML */
+                }
+            });
+        });
+    });
+</script>

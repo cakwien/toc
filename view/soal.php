@@ -60,7 +60,7 @@ if (empty($_SESSION['tryout'])) {
             $idjawab = $dtcekjawab['id_jawab'];
             // echo "kamu menjawab";
             if (empty($dtcekjawab[0])) {
-                $qpilihjawab = mysqli_query($con, "insert into u_jawab value('','$idsiswa','$idjadwal','$idsoal','$idopsi') ");
+                $qpilihjawab = mysqli_query($con, "insert into u_jawab value(NULL,'$idsiswa','$idjadwal','$idsoal','$idopsi') ");
                 if ($qpilihjawab) {
                     header('location:?p=soal&run=' . $urlbasesoal . '&n=' . $_GET['n']);
                 }
@@ -90,12 +90,17 @@ if (empty($_SESSION['tryout'])) {
             $nilaisoal = 100 / $jumlahsoal;
             $nilaiakhir = $jumlahbenar * $nilaisoal;
             $waktu = time();
+            $lama = $waktu - $_SESSION['waktu_start'];
             //masukkan data
-            $qinputnilai = mysqli_query($con, "insert into u_hasil value('','$idsiswa','$idjadwal','$jumlahterjawab','$jumlahbenar','$jumlahsalah','$nilaiakhir','$waktu')");
+            $qinputnilai = mysqli_query($con, "insert into u_hasil value(NULL,'$idsiswa','$idjadwal','$jumlahterjawab','$jumlahbenar','$jumlahsalah','$nilaiakhir','$lama')");
             if ($qinputnilai) {
                 unset($_SESSION['tryout']);
                 unset($_SESSION['waktu_start']);
-                header('location:?p=soal&run='.$urlbasesoal);
+                $qselesai = mysqli_query($con,"delete from u_testrun where id_siswa = '$idsiswa' and id_jadwal = '$idjadwal'");
+                if($qselesai)
+                {
+                    header('location:?p=soal&run='.$urlbasesoal);
+                }
             }
         }
 
